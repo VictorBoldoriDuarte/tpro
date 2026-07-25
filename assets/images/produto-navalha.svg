@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600" role="img" aria-label="Navalha profissional">
+  <defs>
+    <radialGradient id="halo" cx="50%" cy="45%" r="56%">
+      <stop offset="0" stop-color="#dbe3f8"/>
+      <stop offset="1" stop-color="#f4f6fc"/>
+    </radialGradient>
+    <linearGradient id="body" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1e3d9e"/>
+      <stop offset="1" stop-color="#0b1b4d"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="600" fill="url(#halo)"/>
+  <ellipse cx="300" cy="512" rx="150" ry="20" fill="#0f1c3d" opacity=".10"/>
+  <g transform="rotate(-22 300 300)">
+    <rect x="138" y="284" width="230" height="46" rx="18" fill="url(#body)"/>
+    <path d="M364 286h100a22 22 0 0 1 0 44h-100z" fill="#fff" stroke="#0b1b4d" stroke-width="8"/>
+    <path d="M382 308h74" stroke="#ee3b14" stroke-width="10" stroke-linecap="round"/>
+    <circle cx="166" cy="307" r="12" fill="#ee3b14"/>
+  </g>
+</svg>

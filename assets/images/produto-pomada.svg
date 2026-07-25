@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600" role="img" aria-label="Pomada modeladora">
+  <defs>
+    <radialGradient id="halo" cx="50%" cy="45%" r="56%">
+      <stop offset="0" stop-color="#dbe3f8"/>
+      <stop offset="1" stop-color="#f4f6fc"/>
+    </radialGradient>
+    <linearGradient id="body" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1e3d9e"/>
+      <stop offset="1" stop-color="#0b1b4d"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="600" fill="url(#halo)"/>
+  <ellipse cx="300" cy="512" rx="150" ry="20" fill="#0f1c3d" opacity=".10"/>
+  <rect x="176" y="270" width="248" height="174" rx="36" fill="url(#body)"/>
+  <rect x="156" y="204" width="288" height="76" rx="28" fill="#ee3b14"/>
+  <rect x="212" y="332" width="176" height="16" rx="8" fill="#fff" opacity=".55"/>
+  <rect x="212" y="370" width="120" height="14" rx="7" fill="#fff" opacity=".3"/>
+</svg>

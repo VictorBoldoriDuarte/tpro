@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Loja TPRO CLUB | Preços de distribuidor para sua barbearia</title>
+  <meta name="description" content="Catálogo do TPRO CLUB: produtos profissionais de barbearia com preço de distribuidor para membros. Busque por produto, filtre por categoria e compare o preço de cada plano.">
+  <meta name="theme-color" content="#13287a">
+
+  <link rel="icon" href="assets/images/favicon-tpro.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="theme.css">
+  <link rel="stylesheet" href="loja.css">
+  <script src="data.js"></script>
+  <script src="loja.js" defer></script>
+</head>
+
+<body class="loja">
+  <a class="tp-skip-link" href="#catalogo">Ir para o catálogo</a>
+
+  <!-- ==========================================================
+       CABEÇALHO COM BUSCA
+  =========================================================== -->
+  <header class="tp-header shop-header" data-header>
+    <div class="tp-container shop-header__inner">
+      <a class="tp-logo" href="index.html" aria-label="TPRO CLUB — voltar para a página inicial">
+        <span class="tp-logo__t">TPRO</span><span class="tp-logo__c">CLUB</span>
+      </a>
+
+      <form class="shop-search" role="search" data-search-form>
+        <label class="tp-visually-hidden" for="busca">Buscar produtos</label>
+        <svg class="shop-search__icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="7"></circle>
+          <path d="M20 20l-3.5-3.5"></path>
+        </svg>
+        <input class="shop-search__input" type="search" id="busca" name="busca"
+               placeholder="Buscar máquina, lâmina, pomada..." autocomplete="off"
+               aria-describedby="busca-ajuda" data-search-input>
+        <button class="shop-search__clear" type="button" data-search-clear aria-label="Limpar busca" hidden>
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true">
+            <path d="M6 6l12 12M18 6L6 18"></path>
+          </svg>
+        </button>
+        <button class="shop-search__submit tp-btn tp-btn--blue" type="submit">Buscar</button>
+        <p class="tp-visually-hidden" id="busca-ajuda">Os resultados são atualizados conforme você digita.</p>
+      </form>
+
+      <nav class="shop-header__actions" aria-label="Ações da loja">
+        <a class="tp-header__link shop-header__home" href="index.html">Início</a>
+        <a class="tp-header__link shop-header__home" href="index.html#planos">Planos</a>
+
+        <button class="shop-cart-btn" type="button" data-open-cart aria-label="Abrir carrinho">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M3 4h2l2.2 10.2a2 2 0 0 0 2 1.6h7.6a2 2 0 0 0 2-1.5L20.5 7H7"></path>
+            <circle cx="10" cy="20" r="1.4"></circle>
+            <circle cx="17" cy="20" r="1.4"></circle>
+          </svg>
+          <span class="shop-cart-btn__count" data-cart-count hidden>0</span>
+        </button>
+      </nav>
+    </div>
+
+    <!-- Seletor de plano: coração da demonstração de preço -->
+    <div class="plan-switch">
+      <div class="tp-container plan-switch__inner">
+        <p class="plan-switch__label">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true">
+            <path d="M12 3l2.6 5.6 6.4.8-4.7 4.3 1.3 6.3L12 17l-5.6 3 1.3-6.3L3 9.4l6.4-.8z"></path>
+          </svg>
+          Ver preços como:
+        </p>
+        <div class="plan-switch__options" role="radiogroup" aria-label="Plano usado para calcular os preços" data-plan-switch>
+          <!-- Botões gerados por loja.js a partir dos planos cadastrados -->
+        </div>
+        <p class="plan-switch__hint" data-plan-hint>Escolha um plano para ver o preço de membro em todo o catálogo.</p>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ==========================================================
+         FAIXA DE CATEGORIAS
+    =========================================================== -->
+    <section class="cat-strip" aria-label="Categorias em destaque">
+      <div class="tp-container">
+        <ul class="cat-strip__list" data-category-strip>
+          <!-- Gerado por loja.js -->
+        </ul>
+      </div>
+    </section>
+
+    <!-- ==========================================================
+         CATÁLOGO
+    =========================================================== -->
+    <div class="tp-container shop-layout" id="catalogo">
+      <!-- FILTROS -->
+      <aside class="filters" id="filtros" aria-label="Filtros do catálogo" data-filters>
+        <div class="filters__head">
+          <h2 class="filters__title">Filtros</h2>
+          <button class="tp-btn tp-btn--ghost tp-btn--sm" type="button" data-clear-filters>Limpar tudo</button>
+          <button class="filters__close tp-btn tp-btn--icon" type="button" data-close-filters aria-label="Fechar filtros">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true">
+              <path d="M6 6l12 12M18 6L6 18"></path>
+            </svg>
+          </button>
+        </div>
+
+        <section class="filters__group">
+          <h3 class="filters__group-title">Categorias</h3>
+          <ul class="filters__list" data-filter-categories>
+            <!-- Gerado por loja.js -->
+          </ul>
+        </section>
+
+        <section class="filters__group">
+          <h3 class="filters__group-title">Marcas</h3>
+          <ul class="filters__list" data-filter-brands>
+            <!-- Gerado por loja.js -->
+          </ul>
+        </section>
+
+        <section class="filters__group">
+          <h3 class="filters__group-title">Faixa de preço</h3>
+          <div class="filters__price">
+            <div class="tp-field">
+              <label class="tp-label" for="preco-min">Mínimo</label>
+              <input class="tp-input" type="number" id="preco-min" min="0" step="10" placeholder="0" data-price-min>
+            </div>
+            <span class="filters__price-sep" aria-hidden="true">—</span>
+            <div class="tp-field">
+              <label class="tp-label" for="preco-max">Máximo</label>
+              <input class="tp-input" type="number" id="preco-max" min="0" step="10" placeholder="3000" data-price-max>
+            </div>
+          </div>
+          <ul class="filters__chips" data-price-presets>
+            <li><button class="chip" type="button" data-range="0-10000">Até R$ 100</button></li>
+            <li><button class="chip" type="button" data-range="10000-30000">R$ 100 a R$ 300</button></li>
+            <li><button class="chip" type="button" data-range="30000-100000">R$ 300 a R$ 1.000</button></li>
+            <li><button class="chip" type="button" data-range="100000-0">Acima de R$ 1.000</button></li>
+          </ul>
+        </section>
+
+        <section class="filters__group">
+          <h3 class="filters__group-title">Outros</h3>
+          <label class="tp-check">
+            <input type="checkbox" data-filter-stock>
+            Somente em estoque
+          </label>
+          <label class="tp-check">
+            <input type="checkbox" data-filter-deal>
+            Somente com 30% ou mais de desconto
+          </label>
+        </section>
+
+        <div class="filters__apply">
+          <button class="tp-btn tp-btn--red tp-btn--block" type="button" data-close-filters>Ver resultados</button>
+        </div>
+      </aside>
+
+      <!-- RESULTADOS -->
+      <section class="results" aria-label="Resultados do catálogo">
+        <div class="results__bar">
+          <button class="tp-btn tp-btn--outline results__filter-btn" type="button" data-open-filters>
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true">
+              <path d="M4 6h16M7 12h10M10 18h4"></path>
+            </svg>
+            Filtros
+            <span class="results__filter-count" data-filter-count hidden>0</span>
+          </button>
+
+          <p class="results__count" data-results-count aria-live="polite">Carregando produtos…</p>
+
+          <div class="results__sort tp-field">
+            <label class="tp-visually-hidden" for="ordenar">Ordenar por</label>
+            <select class="tp-select" id="ordenar" data-sort>
+              <option value="relevancia">Mais relevantes</option>
+              <option value="desconto">Maior desconto</option>
+              <option value="menor-preco">Menor preço</option>
+              <option value="maior-preco">Maior preço</option>
+              <option value="avaliacao">Melhor avaliados</option>
+              <option value="nome">Nome (A–Z)</option>
+            </select>
+          </div>
+        </div>
+
+        <ul class="active-chips" data-active-chips aria-label="Filtros aplicados"></ul>
+
+        <ul class="product-grid" data-product-grid></ul>
+
+        <div class="empty-state" data-empty hidden>
+          <svg viewBox="0 0 24 24" width="52" height="52" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="7"></circle>
+            <path d="M20 20l-3.5-3.5M8.5 11h5"></path>
+          </svg>
+          <h3>Nenhum produto encontrado</h3>
+          <p>Tente outro termo de busca ou remova alguns filtros.</p>
+          <button class="tp-btn tp-btn--blue" type="button" data-clear-filters>Limpar filtros</button>
+        </div>
+
+        <nav class="pagination" data-pagination aria-label="Paginação dos resultados"></nav>
+      </section>
+    </div>
+
+    <!-- ==========================================================
+         CHAMADA DE ASSINATURA
+    =========================================================== -->
+    <section class="shop-cta">
+      <div class="tp-container shop-cta__inner">
+        <div>
+          <h2 class="shop-cta__title">Ainda não é membro do <span class="tp-text-red">TPRO CLUB</span>?</h2>
+          <p class="shop-cta__text" data-cta-text>
+            Assine um plano e passe a comprar com preço de distribuidor em todo o catálogo.
+          </p>
+        </div>
+        <a class="tp-btn tp-btn--red tp-btn--lg" href="index.html#planos">Quero entrar no clube</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==========================================================
+       RODAPÉ
+  =========================================================== -->
+  <footer class="tp-footer">
+    <div class="tp-container">
+      <div class="tp-footer__inner">
+        <a class="tp-logo tp-logo--sm" href="index.html">
+          <span class="tp-logo__t">TPRO</span><span class="tp-logo__c">CLUB</span>
+        </a>
+        <nav class="tp-footer__links" aria-label="Links do rodapé">
+          <a href="index.html">Início</a>
+          <a href="index.html#planos">Planos</a>
+          <a href="loja.html">Loja</a>
+          <a href="admin.html">Área administrativa</a>
+        </nav>
+      </div>
+      <p class="tp-footer__bottom">
+        &copy; <span data-current-year>2026</span> TPRO CLUB — demonstração do projeto.
+        Produtos, preços e descontos exibidos são exemplos para apresentação.
+      </p>
+    </div>
+  </footer>
+
+  <!-- ==========================================================
+       CARRINHO (GAVETA LATERAL)
+  =========================================================== -->
+  <div class="drawer" data-cart-drawer hidden>
+    <div class="drawer__backdrop" data-close-cart></div>
+    <aside class="drawer__panel" role="dialog" aria-modal="true" aria-labelledby="cart-title">
+      <header class="drawer__head">
+        <h2 class="drawer__title" id="cart-title">Meu carrinho</h2>
+        <button class="tp-modal__close drawer__close" type="button" data-close-cart aria-label="Fechar carrinho">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true">
+            <path d="M6 6l12 12M18 6L6 18"></path>
+          </svg>
+        </button>
+      </header>
+
+      <ul class="cart-list" data-cart-list></ul>
+
+      <p class="cart-empty" data-cart-empty hidden>
+        Seu carrinho está vazio. Adicione produtos do catálogo para ver a economia do clube.
+      </p>
+
+      <footer class="drawer__foot" data-cart-foot hidden>
+        <dl class="cart-summary">
+          <div class="cart-summary__row">
+            <dt>Preço de balcão</dt>
+            <dd data-cart-full>R$ 0,00</dd>
+          </div>
+          <div class="cart-summary__row cart-summary__row--save">
+            <dt>Economia do clube</dt>
+            <dd data-cart-savings>− R$ 0,00</dd>
+          </div>
+          <div class="cart-summary__row cart-summary__row--total">
+            <dt>Total <span data-cart-plan-label>Pro</span></dt>
+            <dd data-cart-total>R$ 0,00</dd>
+          </div>
+        </dl>
+        <button class="tp-btn tp-btn--red tp-btn--block tp-btn--lg" type="button" data-checkout>Finalizar pedido</button>
+        <button class="tp-btn tp-btn--ghost tp-btn--block tp-btn--sm" type="button" data-clear-cart>Esvaziar carrinho</button>
+      </footer>
+    </aside>
+  </div>
+
+  <!-- ==========================================================
+       DETALHE DO PRODUTO
+  =========================================================== -->
+  <div class="tp-modal" data-product-modal hidden>
+    <div class="tp-modal__backdrop" data-close-product></div>
+    <div class="tp-modal__dialog tp-modal__dialog--wide" role="dialog" aria-modal="true" aria-labelledby="produto-titulo">
+      <button class="tp-modal__close" type="button" data-close-product aria-label="Fechar">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18"></path>
+        </svg>
+      </button>
+
+      <div class="pdp">
+        <div class="pdp__gallery">
+          <div class="pdp__stage">
+            <img class="pdp__image" data-pdp-image src="assets/images/sem-imagem.svg" alt="" width="600" height="600">
+          </div>
+          <ul class="pdp__thumbs" data-pdp-thumbs aria-label="Outras imagens do produto"></ul>
+        </div>
+
+        <div class="pdp__info">
+          <p class="pdp__eyebrow"><span data-pdp-brand></span> · <span data-pdp-category></span></p>
+          <h2 class="pdp__title" id="produto-titulo" data-pdp-name>Produto</h2>
+
+          <p class="pdp__rating">
+            <span class="stars" data-pdp-stars aria-hidden="true"></span>
+            <span data-pdp-reviews>0 avaliações</span>
+            <span class="pdp__sku" data-pdp-sku></span>
+          </p>
+
+          <div class="pdp__price">
+            <p class="pdp__price-old">Preço de balcão <s data-pdp-old>R$ 0,00</s></p>
+            <p class="pdp__price-new"><span class="pdp__price-prefix">Seu preço</span> <strong data-pdp-new>R$ 0,00</strong></p>
+            <p class="pdp__price-save" data-pdp-save></p>
+            <p class="pdp__installment" data-pdp-installment></p>
+          </div>
+
+          <p class="pdp__stock" data-pdp-stock></p>
+          <p class="pdp__desc" data-pdp-desc></p>
+
+          <h3 class="pdp__table-title">Quanto custa em cada plano</h3>
+          <table class="plan-table">
+            <caption class="tp-visually-hidden">Comparação de preço do produto entre os planos do clube</caption>
+            <thead>
+              <tr><th scope="col">Plano</th><th scope="col">Desconto</th><th scope="col">Preço</th></tr>
+            </thead>
+            <tbody data-pdp-plans></tbody>
+          </table>
+
+          <div class="pdp__actions">
+            <div class="qty" role="group" aria-label="Quantidade">
+              <button class="qty__btn" type="button" data-pdp-minus aria-label="Diminuir quantidade">−</button>
+              <input class="qty__input" type="number" min="1" max="99" value="1" data-pdp-qty aria-label="Quantidade">
+              <button class="qty__btn" type="button" data-pdp-plus aria-label="Aumentar quantidade">+</button>
+            </div>
+            <button class="tp-btn tp-btn--red tp-btn--lg" type="button" data-pdp-add>Adicionar ao carrinho</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================
+       AVISO GENÉRICO (demonstração)
+  =========================================================== -->
+  <div class="tp-modal" data-notice-modal hidden>
+    <div class="tp-modal__backdrop" data-close-notice></div>
+    <div class="tp-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="aviso-titulo">
+      <button class="tp-modal__close" type="button" data-close-notice aria-label="Fechar">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18"></path>
+        </svg>
+      </button>
+      <p class="tp-modal__eyebrow" data-notice-eyebrow>TPRO CLUB</p>
+      <h2 class="tp-modal__title" id="aviso-titulo" data-notice-title>Aviso</h2>
+      <p class="tp-modal__text" data-notice-text></p>
+      <div class="tp-modal__actions">
+        <button class="tp-btn tp-btn--blue" type="button" data-close-notice>Entendi</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="tp-toasts" data-toasts aria-live="polite" aria-atomic="false"></div>
+
+  <!-- ==========================================================
+       TEMPLATES
+  =========================================================== -->
+  <template id="tpl-card">
+    <li class="product-card">
+      <article>
+        <a class="product-card__media" href="#" data-card-open>
+          <img class="product-card__img" src="" alt="" width="600" height="600" loading="lazy" decoding="async">
+          <span class="product-card__flags" data-field="flags"></span>
+        </a>
+        <div class="product-card__body">
+          <p class="product-card__brand" data-field="brand"></p>
+          <h3 class="product-card__name">
+            <a href="#" data-card-open data-field="name">Produto</a>
+          </h3>
+          <p class="product-card__rating">
+            <span class="stars" data-field="stars" aria-hidden="true"></span>
+            <span class="product-card__reviews" data-field="reviews"></span>
+          </p>
+          <p class="product-card__old">De <s data-field="old">R$ 0,00</s></p>
+          <p class="product-card__price" data-field="price">R$ 0,00</p>
+          <p class="product-card__save" data-field="save"></p>
+          <p class="product-card__installment" data-field="installment"></p>
+          <p class="product-card__stock" data-field="stock"></p>
+          <div class="product-card__actions">
+            <button class="tp-btn tp-btn--red tp-btn--sm product-card__add" type="button" data-card-add>Adicionar</button>
+            <button class="tp-btn tp-btn--outline tp-btn--sm" type="button" data-card-open>Detalhes</button>
+          </div>
+        </div>
+      </article>
+    </li>
+  </template>
+
+  <template id="tpl-cart-item">
+    <li class="cart-item">
+      <img class="cart-item__img" src="" alt="" width="80" height="80" loading="lazy">
+      <div class="cart-item__body">
+        <p class="cart-item__name" data-field="name">Produto</p>
+        <p class="cart-item__unit" data-field="unit"></p>
+        <div class="qty qty--sm" role="group" aria-label="Quantidade">
+          <button class="qty__btn" type="button" data-cart-minus aria-label="Diminuir quantidade">−</button>
+          <input class="qty__input" type="number" min="1" max="99" value="1" data-cart-qty aria-label="Quantidade">
+          <button class="qty__btn" type="button" data-cart-plus aria-label="Aumentar quantidade">+</button>
+        </div>
+      </div>
+      <div class="cart-item__side">
+        <p class="cart-item__total" data-field="total">R$ 0,00</p>
+        <button class="cart-item__remove" type="button" data-cart-remove aria-label="Remover produto">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true">
+            <path d="M5 7h14M10 7V5h4v2M8 7l1 12h6l1-12"></path>
+          </svg>
+        </button>
+      </div>
+    </li>
+  </template>
+
+  <noscript>
+    <div class="tp-container">
+      <p class="tp-note tp-note--demo">
+        O catálogo do TPRO CLUB usa JavaScript para exibir produtos e preços. Ative o JavaScript no navegador.
+      </p>
+    </div>
+  </noscript>
+</body>
+</html>

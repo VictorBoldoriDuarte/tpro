@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600" role="img" aria-label="Produto sem imagem">
+  <rect width="600" height="600" fill="#f4f6fc"/>
+  <rect x="24" y="24" width="552" height="552" rx="26" fill="none" stroke="#cfd7e8" stroke-width="6" stroke-dasharray="22 18"/>
+  <g fill="none" stroke="#9aa6bf" stroke-width="16" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="176" y="206" width="248" height="190" rx="22"/>
+    <path d="M176 342l68-62 60 52 44-38 76 66"/>
+  </g>
+  <circle cx="254" cy="262" r="18" fill="#9aa6bf"/>
+  <text x="300" y="456" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="34" font-weight="700" fill="#7b8699">Sem imagem</text>
+</svg>

@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>TPRO CLUB | Pare de comprar como cliente. Compre como profissional.</title>
+  <meta name="description" content="O TPRO CLUB dá ao dono de barbearia acesso a preços de distribuidor em produtos profissionais. Assine um plano e aumente sua margem em cada atendimento.">
+  <meta name="theme-color" content="#13287a">
+  <meta name="author" content="TPRO CLUB">
+
+  <!-- Open Graph — trocar a URL quando o domínio final estiver definido -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="TPRO CLUB">
+  <meta property="og:title" content="TPRO CLUB | Compre como profissional">
+  <meta property="og:description" content="Acesso a preços de distribuidor em produtos profissionais de barbearia. Pague menos, lucre mais.">
+  <meta property="og:image" content="assets/images/hero-tpro.svg">
+  <meta property="og:url" content="https://exemplo.com.br/">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="assets/images/favicon-tpro.svg" type="image/svg+xml">
+  <link rel="canonical" href="https://exemplo.com.br/">
+
+  <link rel="stylesheet" href="theme.css">
+  <link rel="stylesheet" href="home.css">
+  <script src="data.js"></script>
+  <script src="home.js" defer></script>
+</head>
+
+<body class="home">
+  <a class="tp-skip-link" href="#conteudo">Ir para o conteúdo principal</a>
+
+  <!-- ==========================================================
+       CABEÇALHO
+  =========================================================== -->
+  <header class="tp-header home-header" data-header>
+    <div class="tp-container home-header__inner">
+      <a class="tp-logo" href="#topo" aria-label="TPRO CLUB — início">
+        <span class="tp-logo__t">TPRO</span><span class="tp-logo__c">CLUB</span>
+      </a>
+
+      <nav class="home-nav" id="home-nav" aria-label="Navegação principal">
+        <ul class="home-nav__list">
+          <li><a class="tp-header__link" href="#como-funciona">Como Funciona</a></li>
+          <li><a class="tp-header__link" href="#planos">Planos</a></li>
+          <li><a class="tp-header__link" href="#depoimentos">Depoimentos</a></li>
+          <li><a class="tp-header__link" href="loja.html">Loja</a></li>
+        </ul>
+        <a class="tp-btn tp-btn--red home-nav__cta" href="#planos">Entrar no Clube</a>
+      </nav>
+
+      <button class="nav-toggle" type="button" id="nav-toggle" aria-expanded="false" aria-controls="home-nav" aria-label="Abrir menu">
+        <span class="nav-toggle__bars" aria-hidden="true"></span>
+      </button>
+    </div>
+  </header>
+  <div class="nav-overlay" id="nav-overlay" hidden></div>
+
+  <main id="conteudo">
+    <!-- ==========================================================
+         HERO
+    =========================================================== -->
+    <section class="hero" id="topo">
+      <div class="tp-container hero__inner">
+        <div class="hero__content">
+          <h1 class="hero__title">
+            <span class="hero__title-line hero__title-line--blue">Pare de comprar como cliente.</span>
+            <span class="hero__title-line hero__title-line--red">Compre como profissional.</span>
+          </h1>
+          <span class="hero__rule" aria-hidden="true"></span>
+
+          <p class="hero__text">
+            Tenha acesso a preços de distribuidor<br>
+            e aumente seu lucro em cada atendimento.
+          </p>
+
+          <div class="hero__actions">
+            <a class="tp-btn tp-btn--red tp-btn--lg" href="#planos">Quero acesso</a>
+            <a class="tp-btn tp-btn--outline tp-btn--lg" href="loja.html">Ver o catálogo</a>
+          </div>
+
+          <ul class="hero__proof">
+            <li><strong>+1.500</strong><span>clientes atendidos</span></li>
+            <li><strong>Desde 2011</strong><span>ao lado dos profissionais</span></li>
+            <li><strong>Loja física</strong><span>em Campo Grande, MS</span></li>
+          </ul>
+        </div>
+
+        <div class="hero__visual">
+          <!-- Substituir pela foto real da barbearia quando o cliente enviar -->
+          <img class="hero__image" src="assets/images/hero-tpro.svg"
+               alt="Barbeiro atendendo um cliente na cadeira da barbearia"
+               width="820" height="860" fetchpriority="high" decoding="async">
+
+          <aside class="save-card" aria-labelledby="save-card-title">
+            <p class="save-card__tag">
+              <span class="save-card__dot" aria-hidden="true"></span>
+              Preço de membro <strong data-save-plan>Pro</strong>
+            </p>
+            <h2 class="save-card__name" id="save-card-title" data-save-product>Produto</h2>
+            <p class="save-card__old">De <s data-save-old>R$ 0,00</s></p>
+            <p class="save-card__new" data-save-new>R$ 0,00</p>
+            <p class="save-card__save">Você economiza <strong data-save-diff>R$ 0,00</strong></p>
+          </aside>
+        </div>
+      </div>
+
+      <!-- BENEFÍCIOS (faixa que monta sobre o hero) -->
+      <div class="tp-container">
+        <ul class="benefits">
+          <li class="benefits__item">
+            <span class="benefits__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                <ellipse cx="12" cy="6" rx="8" ry="3"></ellipse>
+                <path d="M4 6v5c0 1.7 3.6 3 8 3s8-1.3 8-3V6"></path>
+                <path d="M4 11v5c0 1.7 3.6 3 8 3s8-1.3 8-3v-5"></path>
+              </svg>
+            </span>
+            <div>
+              <h2 class="benefits__title">Pague menos</h2>
+              <p class="benefits__text">Produtos com preço de distribuidor</p>
+            </div>
+          </li>
+          <li class="benefits__item">
+            <span class="benefits__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 17l5.5-5.5 3.5 3.5L21 6"></path>
+                <path d="M15 6h6v6"></path>
+              </svg>
+            </span>
+            <div>
+              <h2 class="benefits__title">Lucre mais</h2>
+              <p class="benefits__text">Aumente sua margem em cada venda</p>
+            </div>
+          </li>
+          <li class="benefits__item">
+            <span class="benefits__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="4" y="10" width="16" height="11" rx="2.5"></rect>
+                <path d="M8 10V7a4 4 0 0 1 8 0v3"></path>
+              </svg>
+            </span>
+            <div>
+              <h2 class="benefits__title">Acesso exclusivo</h2>
+              <p class="benefits__text">Ofertas e condições só para membros</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ==========================================================
+         COMO FUNCIONA
+    =========================================================== -->
+    <section class="section" id="como-funciona" aria-labelledby="como-funciona-title">
+      <div class="tp-container">
+        <h2 class="tp-section-title" id="como-funciona-title">Como Funciona</h2>
+
+        <ol class="how">
+          <li class="how__step">
+            <span class="how__number">1.</span>
+            <p class="how__text">Assine o<br><strong>TPRO CLUB</strong></p>
+          </li>
+          <li class="how__arrow" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 5l7 7-7 7"></path>
+            </svg>
+          </li>
+          <li class="how__step">
+            <span class="how__number">2.</span>
+            <p class="how__text">Acesse os<br><strong>Preços Exclusivos</strong></p>
+          </li>
+          <li class="how__arrow" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 5l7 7-7 7"></path>
+            </svg>
+          </li>
+          <li class="how__step">
+            <span class="how__number">3.</span>
+            <p class="how__text">Compre Mais<br><strong>Barato</strong></p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ==========================================================
+         PREÇOS PARA MEMBROS
+    =========================================================== -->
+    <section class="section section--soft" id="precos" aria-labelledby="precos-title">
+      <div class="tp-container">
+        <h2 class="tp-section-title" id="precos-title">
+          Preços especiais <span class="tp-text-red">para membros</span>
+        </h2>
+
+        <!-- Seletor de nível: mostra o preço de cada plano sem sair da página -->
+        <div class="level-tabs" role="tablist" aria-label="Nível do clube" data-level-tabs></div>
+
+        <ul class="showcase" data-showcase></ul>
+
+        <p class="section__note">
+          Produtos e valores demonstrativos, usados para ilustrar o funcionamento do clube.
+          <a class="section__link" href="loja.html">Ver o catálogo completo →</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- ==========================================================
+         PLANOS
+    =========================================================== -->
+    <section class="section" id="planos" aria-labelledby="planos-title">
+      <div class="tp-container">
+        <h2 class="tp-section-title" id="planos-title">
+          Escolha <span class="tp-text-red">seu plano</span>
+        </h2>
+
+        <div class="plans" data-plans></div>
+
+        <!-- SIMULADOR -->
+        <section class="sim" aria-labelledby="sim-title">
+          <div class="sim__intro">
+            <h3 class="sim__title" id="sim-title">Quanto sua barbearia economiza por mês?</h3>
+            <p class="sim__text">
+              Arraste para informar quanto você compra de reposição por mês e veja o retorno de cada plano.
+            </p>
+
+            <label class="tp-label" for="sim-range">Compra mensal da barbearia</label>
+            <input class="sim__range" type="range" id="sim-range" min="500" max="10000" step="100" value="1500"
+                   aria-describedby="sim-output">
+            <div class="sim__scale" aria-hidden="true"><span>R$ 500</span><span>R$ 10.000</span></div>
+            <output class="sim__output" id="sim-output" for="sim-range" data-sim-output>R$ 1.500,00 por mês</output>
+          </div>
+
+          <ul class="sim__results" data-sim-results aria-live="polite"></ul>
+        </section>
+
+        <p class="section__note">
+          Os valores das assinaturas são demonstrativos e serão confirmados antes da publicação.
+          A simulação usa o desconto padrão de cada plano.
+        </p>
+      </div>
+    </section>
+
+    <!-- ==========================================================
+         DEPOIMENTOS
+    =========================================================== -->
+    <section class="section section--soft" id="depoimentos" aria-labelledby="depoimentos-title">
+      <div class="tp-container">
+        <h2 class="tp-section-title" id="depoimentos-title">
+          Quem já <span class="tp-text-red">compra assim</span>
+        </h2>
+        <p class="section__lead">
+          Conteúdo provisório — os depoimentos reais dos profissionais serão inseridos antes da publicação.
+        </p>
+
+        <ul class="quotes" data-quotes></ul>
+      </div>
+    </section>
+
+    <!-- ==========================================================
+         NOSSA HISTÓRIA
+    =========================================================== -->
+    <section class="section" id="historia" aria-labelledby="historia-title">
+      <div class="tp-container story">
+        <div>
+          <h2 class="story__title" id="historia-title">
+            De porta em porta a um <span class="tp-text-red">clube de profissionais</span>
+          </h2>
+          <p class="story__lead">
+            O TPRO CLUB não nasceu numa sala de reunião. Nasceu na rua, batendo de porta em porta,
+            conversando com barbeiro atrás de barbeiro para entender o que faltava no balcão de cada barbearia.
+          </p>
+
+          <ol class="timeline">
+            <li class="timeline__item">
+              <span class="timeline__year">2011</span>
+              <h3 class="timeline__head">O começo, de porta em porta</h3>
+              <p>As primeiras vendas foram feitas pessoalmente, uma barbearia por vez. Foi assim que a marca
+                 aprendeu na prática o que cada profissional realmente usa no dia a dia.</p>
+            </li>
+            <li class="timeline__item">
+              <span class="timeline__year">2013</span>
+              <h3 class="timeline__head">A loja física em Campo Grande</h3>
+              <p>A abertura da loja em Campo Grande, Mato Grosso do Sul, deu endereço fixo para uma relação
+                 que já existia há dois anos com os profissionais da região.</p>
+            </li>
+            <li class="timeline__item">
+              <span class="timeline__year">Hoje</span>
+              <h3 class="timeline__head">Mais de 1.500 clientes e o TPRO CLUB</h3>
+              <p>O próximo passo é transformar essa trajetória em um clube com condições exclusivas
+                 para quem vive da profissão.</p>
+            </li>
+          </ol>
+        </div>
+
+        <aside class="story__stat">
+          <strong>+1.500</strong>
+          <span>clientes atendidos desde 2011</span>
+          <p>Loja física em Campo Grande, MS, desde 2013.</p>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ==========================================================
+         FAQ
+    =========================================================== -->
+    <section class="section section--soft" id="faq" aria-labelledby="faq-title">
+      <div class="tp-container tp-container--narrow">
+        <h2 class="tp-section-title" id="faq-title">Perguntas <span class="tp-text-red">frequentes</span></h2>
+
+        <div class="accordion" data-accordion>
+          <div class="accordion__item">
+            <h3><button class="accordion__trigger" type="button" aria-expanded="false" aria-controls="faq-1">
+              <span>O que é o TPRO CLUB?</span><span class="accordion__icon" aria-hidden="true"></span>
+            </button></h3>
+            <div class="accordion__panel" id="faq-1" role="region" hidden>
+              <p>É um clube de assinatura para donos de barbearia e profissionais do setor. Com a assinatura
+                 ativa, você compra produtos de reposição com preço de distribuidor, além de acessar campanhas
+                 e condições reservadas aos membros.</p>
+            </div>
+          </div>
+
+          <div class="accordion__item">
+            <h3><button class="accordion__trigger" type="button" aria-expanded="false" aria-controls="faq-2">
+              <span>Preciso ter CNPJ para participar?</span><span class="accordion__icon" aria-hidden="true"></span>
+            </button></h3>
+            <div class="accordion__panel" id="faq-2" role="region" hidden>
+              <p>As regras de participação estão sendo definidas junto com a estrutura do clube. O foco é o
+                 profissional de barbearia, então a validação do perfil de cada membro será informada
+                 oficialmente antes da abertura das assinaturas.</p>
+            </div>
+          </div>
+
+          <div class="accordion__item">
+            <h3><button class="accordion__trigger" type="button" aria-expanded="false" aria-controls="faq-3">
+              <span>Todos os produtos têm o mesmo desconto?</span><span class="accordion__icon" aria-hidden="true"></span>
+            </button></h3>
+            <div class="accordion__panel" id="faq-3" role="region" hidden>
+              <p>Não. O desconto depende do plano assinado e também do produto. Cada plano tem um percentual
+                 padrão, e itens selecionados podem ter uma condição própria — no nível mais alto, chegando
+                 a até 70% em produtos específicos.</p>
+            </div>
+          </div>
+
+          <div class="accordion__item">
+            <h3><button class="accordion__trigger" type="button" aria-expanded="false" aria-controls="faq-4">
+              <span>Posso trocar de plano depois?</span><span class="accordion__icon" aria-hidden="true"></span>
+            </button></h3>
+            <div class="accordion__panel" id="faq-4" role="region" hidden>
+              <p>Sim. A ideia é permitir que o profissional suba ou desça de nível conforme o momento da
+                 barbearia. As regras de troca, prazos e vigência serão publicadas junto com os termos.</p>
+            </div>
+          </div>
+
+          <div class="accordion__item">
+            <h3><button class="accordion__trigger" type="button" aria-expanded="false" aria-controls="faq-5">
+              <span>Como será feita a cobrança da assinatura?</span><span class="accordion__icon" aria-hidden="true"></span>
+            </button></h3>
+            <div class="accordion__panel" id="faq-5" role="region" hidden>
+              <p>A cobrança recorrente e o sistema definitivo de assinaturas ainda serão integrados. Nesta
+                 versão não há cadastro, pagamento ou armazenamento de dados: é uma demonstração visual do
+                 funcionamento do clube.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================
+         CHAMADA FINAL
+    =========================================================== -->
+    <section class="final" aria-labelledby="final-title">
+      <div class="tp-container">
+        <h2 class="tp-section-title final__title" id="final-title">
+          Lucre mais <span class="tp-text-red">todos os dias</span>
+        </h2>
+        <p class="final__text">
+          Entre para o TPRO CLUB e aumente sua margem de lucro em cada compra.
+        </p>
+        <a class="tp-btn tp-btn--red tp-btn--lg" href="#planos">Quero entrar no clube</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==========================================================
+       RODAPÉ
+  =========================================================== -->
+  <footer class="tp-footer">
+    <div class="tp-container">
+      <div class="tp-footer__inner">
+        <a class="tp-logo" href="#topo">
+          <span class="tp-logo__t">TPRO</span><span class="tp-logo__c">CLUB</span>
+        </a>
+        <nav class="tp-footer__links" aria-label="Links do rodapé">
+          <a href="loja.html">Loja</a>
+          <button class="link-btn" type="button" data-open-modal data-modal-context="Termos de uso">Termos de Uso</button>
+          <button class="link-btn" type="button" data-open-modal data-modal-context="Política de privacidade">Política de Privacidade</button>
+          <button class="link-btn" type="button" data-open-modal data-modal-context="Contato">Contato</button>
+          <a href="admin.html">Área administrativa</a>
+        </nav>
+      </div>
+
+      <!-- Preencher os dados reais da empresa -->
+      <ul class="foot-data">
+        <li><span>CNPJ</span> [Inserir CNPJ]</li>
+        <li><span>Endereço</span> [Inserir endereço] — Campo Grande, MS</li>
+        <li><span>Telefone</span> [Inserir telefone]</li>
+        <li><span>E-mail</span> [Inserir e-mail]</li>
+      </ul>
+
+      <p class="tp-footer__bottom">
+        &copy; <span data-current-year>2026</span> TPRO CLUB. Todos os direitos reservados.<br>
+        Página de demonstração — preços, descontos e produtos exibidos são exemplos para apresentação do projeto.
+      </p>
+    </div>
+  </footer>
+
+  <!-- ==========================================================
+       MODAL DEMONSTRATIVO
+  =========================================================== -->
+  <div class="tp-modal" data-modal hidden>
+    <div class="tp-modal__backdrop" data-modal-close></div>
+    <div class="tp-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <button class="tp-modal__close" type="button" data-modal-close aria-label="Fechar">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18"></path>
+        </svg>
+      </button>
+      <p class="tp-modal__eyebrow" data-modal-eyebrow>TPRO CLUB</p>
+      <h2 class="tp-modal__title" id="modal-title" data-modal-title>Plano</h2>
+      <p class="tp-modal__text" data-modal-text>
+        O fluxo de cadastro, pagamento e ativação da assinatura será conectado na próxima etapa do projeto.
+      </p>
+      <p class="tp-modal__text tp-modal__text--strong" data-modal-note></p>
+      <div class="tp-modal__actions">
+        <button class="tp-btn tp-btn--red" type="button" data-modal-close>Entendi</button>
+        <a class="tp-btn tp-btn--outline" href="loja.html">Ver o catálogo</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================
+       TEMPLATES
+  =========================================================== -->
+  <template id="tpl-showcase">
+    <li class="show-card">
+      <div class="show-card__media">
+        <img src="" alt="" width="600" height="600" loading="lazy" decoding="async">
+        <span class="tp-badge tp-badge--red show-card__off" data-field="off">-15%</span>
+      </div>
+      <p class="show-card__name" data-field="name">Produto</p>
+      <p class="show-card__old">De <s data-field="old">R$ 0,00</s></p>
+      <p class="show-card__new">Por <strong data-field="new">R$ 0,00</strong></p>
+      <a class="tp-btn tp-btn--outline tp-btn--sm show-card__cta" href="loja.html" data-field="cta">Ver na loja</a>
+    </li>
+  </template>
+
+  <template id="tpl-plan">
+    <article class="plan">
+      <header class="plan__head">
+        <h3 class="plan__name" data-field="name">Pro</h3>
+        <span class="plan__flag" data-field="flag">Mais escolhido</span>
+      </header>
+      <p class="plan__price">
+        <span class="plan__amount" data-field="amount">59</span><span class="plan__cents" data-field="cents">,90</span><span class="plan__period">/mês</span>
+      </p>
+      <p class="plan__tagline" data-field="tagline">Melhor custo-benefício</p>
+      <p class="plan__discount" data-field="discount">15% de desconto</p>
+      <ul class="plan__benefits" data-field="benefits"></ul>
+      <button class="tp-btn plan__cta" type="button" data-field="cta">Assinar agora</button>
+      <p class="plan__temp">Valor demonstrativo, a confirmar</p>
+    </article>
+  </template>
+
+  <template id="tpl-quote">
+    <li class="quote">
+      <p class="quote__stars" aria-hidden="true">★★★★★</p>
+      <blockquote class="quote__text"><p data-field="text">Depoimento</p></blockquote>
+      <footer class="quote__author">
+        <span class="quote__avatar" data-field="initials" aria-hidden="true">AB</span>
+        <span>
+          <strong data-field="name">Nome</strong>
+          <small data-field="role">Barbearia</small>
+        </span>
+      </footer>
+    </li>
+  </template>
+
+  <template id="tpl-sim">
+    <li class="sim-result">
+      <span class="sim-result__plan" data-field="plan">Pro</span>
+      <strong class="sim-result__value" data-field="value">R$ 0,00</strong>
+      <span class="sim-result__label" data-field="label">de economia por mês</span>
+    </li>
+  </template>
+
+  <noscript>
+    <div class="tp-container">
+      <p class="tp-note tp-note--demo">
+        Esta página usa JavaScript para exibir produtos, planos e simulações. Ative o JavaScript no navegador.
+      </p>
+    </div>
+  </noscript>
+</body>
+</html>

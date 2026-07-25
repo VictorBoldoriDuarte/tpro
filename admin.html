@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+
+  <title>Painel administrativo | TPRO CLUB</title>
+  <meta name="description" content="Painel administrativo do TPRO CLUB: cadastro de produtos, imagens, percentuais de desconto por plano, categorias e configuração dos planos.">
+  <meta name="theme-color" content="#13287a">
+
+  <link rel="icon" href="assets/images/favicon-tpro.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="theme.css">
+  <link rel="stylesheet" href="admin.css">
+  <script src="data.js"></script>
+  <script src="admin.js" defer></script>
+</head>
+
+<body class="admin">
+  <!-- ==========================================================
+       ENTRADA (demonstração)
+  =========================================================== -->
+  <div class="login" data-login hidden>
+    <form class="login__card" data-login-form>
+      <span class="tp-logo tp-logo--lg login__logo">
+        <span class="tp-logo__t">TPRO</span><span class="tp-logo__c">CLUB</span>
+      </span>
+      <h1 class="login__title">Painel administrativo</h1>
+      <p class="login__text">Área de gestão do catálogo, dos preços e dos planos do clube.</p>
+
+      <div class="tp-field">
+        <label class="tp-label" for="login-user">Usuário</label>
+        <input class="tp-input" type="text" id="login-user" value="admin" autocomplete="username" required>
+      </div>
+
+      <div class="tp-field">
+        <label class="tp-label" for="login-pass">Senha</label>
+        <input class="tp-input" type="password" id="login-pass" autocomplete="current-password" required>
+      </div>
+
+      <p class="tp-error" data-login-error role="alert"></p>
+
+      <button class="tp-btn tp-btn--red tp-btn--block tp-btn--lg" type="submit">Entrar no painel</button>
+
+      <p class="tp-note tp-note--demo login__demo">
+        <strong>Acesso de demonstração:</strong> usuário <code>admin</code> e senha <code>tpro2026</code>.
+        A autenticação real (com senha no servidor) entra junto com o backend.
+      </p>
+    </form>
+  </div>
+
+  <!-- ==========================================================
+       PAINEL
+  =========================================================== -->
+  <div class="admin-shell" data-shell hidden>
+    <!-- BARRA LATERAL -->
+    <aside class="side" data-side>
+      <div class="side__head">
+        <a class="tp-logo tp-logo--sm" href="index.html">
+          <span class="tp-logo__t">TPRO</span><span class="tp-logo__c">CLUB</span>
+        </a>
+        <button class="side__close tp-btn tp-btn--icon" type="button" data-close-side aria-label="Fechar menu">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true">
+            <path d="M6 6l12 12M18 6L6 18"></path>
+          </svg>
+        </button>
+      </div>
+
+      <nav class="side__nav" aria-label="Seções do painel">
+        <button class="side__link is-active" type="button" data-view-link="painel">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="3" width="7" height="9" rx="2"></rect>
+            <rect x="14" y="3" width="7" height="5" rx="2"></rect>
+            <rect x="14" y="12" width="7" height="9" rx="2"></rect>
+            <rect x="3" y="16" width="7" height="5" rx="2"></rect>
+          </svg>
+          Visão geral
+        </button>
+        <button class="side__link" type="button" data-view-link="produtos">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M20 7L12 3 4 7v10l8 4 8-4z"></path>
+            <path d="M4 7l8 4 8-4M12 11v10"></path>
+          </svg>
+          Produtos
+          <span class="side__badge" data-side-count-products>0</span>
+        </button>
+        <button class="side__link" type="button" data-view-link="categorias">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M4 6h16M4 12h16M4 18h10"></path>
+          </svg>
+          Categorias
+          <span class="side__badge" data-side-count-categories>0</span>
+        </button>
+        <button class="side__link" type="button" data-view-link="planos">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 3l2.6 5.6 6.4.8-4.7 4.3 1.3 6.3L12 17l-5.6 3 1.3-6.3L3 9.4l6.4-.8z"></path>
+          </svg>
+          Planos e descontos
+        </button>
+        <button class="side__link" type="button" data-view-link="dados">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <ellipse cx="12" cy="6" rx="8" ry="3"></ellipse>
+            <path d="M4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"></path>
+          </svg>
+          Dados e backup
+        </button>
+      </nav>
+
+      <div class="side__foot">
+        <a class="tp-btn tp-btn--outline tp-btn--block tp-btn--sm" href="loja.html" target="_blank" rel="noopener">
+          Ver a loja
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"></path>
+          </svg>
+        </a>
+        <button class="tp-btn tp-btn--ghost tp-btn--block tp-btn--sm" type="button" data-logout>Sair do painel</button>
+      </div>
+    </aside>
+
+    <div class="side__overlay" data-close-side hidden></div>
+
+    <!-- CONTEÚDO -->
+    <div class="admin-main">
+      <header class="topbar">
+        <button class="topbar__menu tp-btn tp-btn--icon" type="button" data-open-side aria-label="Abrir menu">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true">
+            <path d="M4 7h16M4 12h16M4 17h16"></path>
+          </svg>
+        </button>
+        <div>
+          <h1 class="topbar__title" data-view-title>Visão geral</h1>
+          <p class="topbar__sub" data-view-sub>Resumo do catálogo do clube</p>
+        </div>
+        <button class="tp-btn tp-btn--red topbar__new" type="button" data-new-product>
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true">
+            <path d="M12 5v14M5 12h14"></path>
+          </svg>
+          Novo produto
+        </button>
+      </header>
+
+      <main class="admin-content">
+        <!-- ======================= VISÃO GERAL ======================= -->
+        <section class="view is-active" data-view="painel" aria-labelledby="view-painel">
+          <h2 class="tp-visually-hidden" id="view-painel">Visão geral</h2>
+
+          <ul class="kpis" data-kpis></ul>
+
+          <div class="panel-grid">
+            <section class="panel">
+              <header class="panel__head">
+                <h3 class="panel__title">Produtos com estoque baixo</h3>
+                <button class="tp-btn tp-btn--ghost tp-btn--sm" type="button" data-view-link="produtos">Ver todos</button>
+              </header>
+              <ul class="mini-list" data-low-stock></ul>
+            </section>
+
+            <section class="panel">
+              <header class="panel__head">
+                <h3 class="panel__title">Maiores descontos do clube</h3>
+              </header>
+              <ul class="mini-list" data-top-discounts></ul>
+            </section>
+
+            <section class="panel">
+              <header class="panel__head">
+                <h3 class="panel__title">Produtos por categoria</h3>
+              </header>
+              <ul class="bar-list" data-category-chart></ul>
+            </section>
+
+            <section class="panel">
+              <header class="panel__head">
+                <h3 class="panel__title">Como apresentar</h3>
+              </header>
+              <ol class="steps-list">
+                <li>Abra a <a href="loja.html" target="_blank" rel="noopener">loja</a> em outra aba do navegador.</li>
+                <li>Cadastre ou edite um produto aqui no painel.</li>
+                <li>Volte para a aba da loja: ela se atualiza sozinha com o que foi salvo.</li>
+                <li>Na loja, troque o plano na barra azul para mostrar o preço de cada nível.</li>
+              </ol>
+            </section>
+          </div>
+        </section>
+
+        <!-- ======================= PRODUTOS ======================= -->
+        <section class="view" data-view="produtos" aria-labelledby="view-produtos" hidden>
+          <h2 class="tp-visually-hidden" id="view-produtos">Produtos</h2>
+
+          <div class="toolbar">
+            <div class="toolbar__search">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true">
+                <circle cx="11" cy="11" r="7"></circle>
+                <path d="M20 20l-3.5-3.5"></path>
+              </svg>
+              <label class="tp-visually-hidden" for="admin-busca">Buscar produto</label>
+              <input class="tp-input" type="search" id="admin-busca" placeholder="Buscar por nome, marca ou código" data-admin-search>
+            </div>
+
+            <div class="tp-field">
+              <label class="tp-visually-hidden" for="admin-categoria">Filtrar por categoria</label>
+              <select class="tp-select" id="admin-categoria" data-admin-category>
+                <option value="">Todas as categorias</option>
+              </select>
+            </div>
+
+            <div class="tp-field">
+              <label class="tp-visually-hidden" for="admin-status">Filtrar por situação</label>
+              <select class="tp-select" id="admin-status" data-admin-status>
+                <option value="">Ativos e inativos</option>
+                <option value="ativo">Somente ativos</option>
+                <option value="inativo">Somente inativos</option>
+                <option value="sem-estoque">Sem estoque</option>
+              </select>
+            </div>
+
+            <button class="tp-btn tp-btn--red" type="button" data-new-product>
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true">
+                <path d="M12 5v14M5 12h14"></path>
+              </svg>
+              Novo produto
+            </button>
+          </div>
+
+          <div class="table-wrap">
+            <table class="data-table">
+              <caption class="tp-visually-hidden">Lista de produtos cadastrados</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Produto</th>
+                  <th scope="col">Categoria</th>
+                  <th scope="col">Preço cheio</th>
+                  <th scope="col">Descontos por plano</th>
+                  <th scope="col">Estoque</th>
+                  <th scope="col">Situação</th>
+                  <th scope="col"><span class="tp-visually-hidden">Ações</span></th>
+                </tr>
+              </thead>
+              <tbody data-product-rows></tbody>
+            </table>
+          </div>
+
+          <p class="table-empty" data-product-empty hidden>Nenhum produto encontrado com esses filtros.</p>
+        </section>
+
+        <!-- ======================= CATEGORIAS ======================= -->
+        <section class="view" data-view="categorias" aria-labelledby="view-categorias" hidden>
+          <h2 class="tp-visually-hidden" id="view-categorias">Categorias</h2>
+
+          <div class="panel-grid panel-grid--split">
+            <section class="panel">
+              <header class="panel__head">
+                <h3 class="panel__title">Categorias cadastradas</h3>
+              </header>
+              <ul class="cat-list" data-category-list></ul>
+            </section>
+
+            <section class="panel">
+              <header class="panel__head">
+                <h3 class="panel__title">Nova categoria</h3>
+              </header>
+              <form class="panel__form" data-category-form>
+                <div class="tp-field">
+                  <label class="tp-label" for="cat-nome">Nome da categoria</label>
+                  <input class="tp-input" type="text" id="cat-nome" placeholder="Ex.: Coloração" required maxlength="40">
+                  <p class="tp-hint">O endereço da categoria é gerado a partir do nome.</p>
+                </div>
+                <button class="tp-btn tp-btn--blue" type="submit">Adicionar categoria</button>
+              </form>
+            </section>
+          </div>
+        </section>
+
+        <!-- ======================= PLANOS ======================= -->
+        <section class="view" data-view="planos" aria-labelledby="view-planos" hidden>
+          <h2 class="tp-visually-hidden" id="view-planos">Planos e descontos</h2>
+
+          <p class="tp-note">
+            O percentual definido aqui é o <strong>desconto padrão</strong> do plano: vale para todo produto
+            que não tiver um percentual próprio cadastrado na ficha dele.
+          </p>
+
+          <div class="plans-admin" data-plans-admin></div>
+        </section>
+
+        <!-- ======================= DADOS ======================= -->
+        <section class="view" data-view="dados" aria-labelledby="view-dados" hidden>
+          <h2 class="tp-visually-hidden" id="view-dados">Dados e backup</h2>
+
+          <div class="panel-grid panel-grid--split">
+            <section class="panel">
+              <header class="panel__head">
+                <h3 class="panel__title">Exportar catálogo</h3>
+              </header>
+              <p class="panel__text">
+                Baixe um arquivo com todos os produtos, categorias e planos. Serve como backup e para levar
+                o catálogo para outro computador.
+              </p>
+              <button class="tp-btn tp-btn--blue" type="button" data-export>Baixar arquivo .json</button>
+            </section>
+
+            <section class="panel">
+              <header class="panel__head">
+                <h3 class="panel__title">Importar catálogo</h3>
+              </header>
+              <p class="panel__text">
+                Substitui o catálogo atual pelo conteúdo de um arquivo exportado anteriormente.
+              </p>
+              <label class="tp-btn tp-btn--outline file-btn">
+                Escolher arquivo .json
+                <input type="file" accept="application/json,.json" data-import hidden>
+              </label>
+            </section>
+
+            <section class="panel">
+              <header class="panel__head">
+                <h3 class="panel__title">Restaurar catálogo padrão</h3>
+              </header>
+              <p class="panel__text">
+                Volta para os 16 produtos de demonstração que vieram com o projeto. Tudo o que foi cadastrado
+                neste navegador é descartado.
+              </p>
+              <button class="tp-btn tp-btn--outline-red" type="button" data-reset>Restaurar padrão</button>
+            </section>
+
+            <section class="panel">
+              <header class="panel__head">
+                <h3 class="panel__title">Onde os dados ficam salvos</h3>
+              </header>
+              <p class="panel__text">
+                Nesta demonstração, o catálogo é gravado no armazenamento local deste navegador — sem servidor
+                e sem envio de dados. Ao conectar o backend, o painel passa a gravar direto no banco, e o mesmo
+                catálogo aparece para todos os membros.
+              </p>
+              <p class="panel__text panel__text--muted" data-storage-info></p>
+            </section>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <!-- ==========================================================
+       FICHA DO PRODUTO
+  =========================================================== -->
+  <div class="tp-modal" data-product-modal hidden>
+    <div class="tp-modal__backdrop" data-close-product></div>
+    <div class="tp-modal__dialog tp-modal__dialog--wide" role="dialog" aria-modal="true" aria-labelledby="ficha-titulo">
+      <button class="tp-modal__close" type="button" data-close-product aria-label="Fechar">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18"></path>
+        </svg>
+      </button>
+
+      <p class="tp-modal__eyebrow">Ficha do produto</p>
+      <h2 class="tp-modal__title" id="ficha-titulo" data-form-title>Novo produto</h2>
+
+      <form class="pform" data-product-form novalidate>
+        <input type="hidden" data-field="id">
+
+        <!-- IMAGENS -->
+        <fieldset class="pform__block">
+          <legend class="pform__legend">Imagens do produto</legend>
+          <p class="tp-hint pform__legend-hint">
+            A primeira imagem é a capa exibida na loja. Arraste para reordenar ou use os botões de cada foto.
+          </p>
+
+          <ul class="img-grid" data-image-list></ul>
+
+          <div class="img-actions">
+            <label class="tp-btn tp-btn--outline tp-btn--sm file-btn">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 16V4M8 8l4-4 4 4M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"></path>
+              </svg>
+              Enviar imagens
+              <input type="file" accept="image/*" multiple data-image-upload hidden>
+            </label>
+
+            <div class="img-url">
+              <label class="tp-visually-hidden" for="img-url">Endereço da imagem</label>
+              <input class="tp-input" type="url" id="img-url" placeholder="Ou cole o endereço de uma imagem (https://...)" data-image-url>
+              <button class="tp-btn tp-btn--blue tp-btn--sm" type="button" data-image-url-add>Adicionar</button>
+            </div>
+          </div>
+          <p class="tp-hint">
+            As fotos enviadas são reduzidas automaticamente para caber no armazenamento do navegador.
+          </p>
+        </fieldset>
+
+        <!-- DADOS -->
+        <fieldset class="pform__block">
+          <legend class="pform__legend">Dados do produto</legend>
+
+          <div class="pform__grid">
+            <div class="tp-field pform__col-full">
+              <label class="tp-label" for="p-nome">Nome do produto *</label>
+              <input class="tp-input" type="text" id="p-nome" data-field="name" maxlength="120" required>
+              <p class="tp-error" data-error="name"></p>
+            </div>
+
+            <div class="tp-field">
+              <label class="tp-label" for="p-marca">Marca</label>
+              <input class="tp-input" type="text" id="p-marca" data-field="brand" maxlength="40" list="marcas-existentes">
+              <datalist id="marcas-existentes" data-brand-options></datalist>
+            </div>
+
+            <div class="tp-field">
+              <label class="tp-label" for="p-sku">Código / SKU</label>
+              <input class="tp-input" type="text" id="p-sku" data-field="sku" maxlength="30">
+            </div>
+
+            <div class="tp-field">
+              <label class="tp-label" for="p-categoria">Categoria *</label>
+              <select class="tp-select" id="p-categoria" data-field="category" required></select>
+            </div>
+
+            <div class="tp-field">
+              <label class="tp-label" for="p-estoque">Estoque (unidades)</label>
+              <input class="tp-input" type="number" id="p-estoque" data-field="stock" min="0" max="99999" step="1" value="0">
+            </div>
+
+            <div class="tp-field pform__col-full">
+              <label class="tp-label" for="p-descricao">Descrição</label>
+              <textarea class="tp-textarea" id="p-descricao" data-field="description" maxlength="600"
+                        placeholder="Explique para o barbeiro o que esse produto resolve no dia a dia da barbearia."></textarea>
+              <p class="tp-hint"><span data-desc-count>0</span>/600 caracteres</p>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- PREÇO E DESCONTOS -->
+        <fieldset class="pform__block">
+          <legend class="pform__legend">Preço e descontos por plano</legend>
+          <p class="tp-hint pform__legend-hint">
+            Informe o preço cheio (o que um cliente comum pagaria) e o percentual de desconto de cada plano.
+            Deixe em branco para usar o desconto padrão do plano.
+          </p>
+
+          <div class="pform__grid">
+            <div class="tp-field">
+              <label class="tp-label" for="p-preco">Preço cheio (R$) *</label>
+              <input class="tp-input" type="text" id="p-preco" data-field="price" inputmode="decimal" placeholder="0,00" required>
+              <p class="tp-error" data-error="price"></p>
+            </div>
+          </div>
+
+          <ul class="disc-grid" data-discount-grid></ul>
+
+          <div class="price-preview" data-price-preview aria-live="polite"></div>
+        </fieldset>
+
+        <!-- EXIBIÇÃO -->
+        <fieldset class="pform__block">
+          <legend class="pform__legend">Exibição na loja</legend>
+          <div class="pform__switches">
+            <label class="tp-switch">
+              <input type="checkbox" data-field="active" checked>
+              <span class="tp-switch__track"></span>
+              Produto ativo (aparece na loja)
+            </label>
+            <label class="tp-switch">
+              <input type="checkbox" data-field="featured">
+              <span class="tp-switch__track"></span>
+              Marcar como destaque
+            </label>
+          </div>
+        </fieldset>
+
+        <footer class="pform__foot">
+          <button class="tp-btn tp-btn--ghost" type="button" data-close-product>Cancelar</button>
+          <button class="tp-btn tp-btn--red" type="submit">Salvar produto</button>
+        </footer>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==========================================================
+       CONFIRMAÇÃO
+  =========================================================== -->
+  <div class="tp-modal" data-confirm-modal hidden>
+    <div class="tp-modal__backdrop" data-close-confirm></div>
+    <div class="tp-modal__dialog" role="alertdialog" aria-modal="true" aria-labelledby="confirm-titulo">
+      <p class="tp-modal__eyebrow">Confirmação</p>
+      <h2 class="tp-modal__title" id="confirm-titulo" data-confirm-title>Tem certeza?</h2>
+      <p class="tp-modal__text" data-confirm-text></p>
+      <div class="tp-modal__actions">
+        <button class="tp-btn tp-btn--ghost" type="button" data-close-confirm>Cancelar</button>
+        <button class="tp-btn tp-btn--red" type="button" data-confirm-ok>Confirmar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="tp-toasts" data-toasts aria-live="polite"></div>
+
+  <noscript>
+    <div class="tp-container">
+      <p class="tp-note tp-note--demo">O painel administrativo precisa de JavaScript ativado.</p>
+    </div>
+  </noscript>
+</body>
+</html>

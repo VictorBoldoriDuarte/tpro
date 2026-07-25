@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 860" width="820" height="860" role="img"
+     aria-label="Ilustração de um barbeiro atendendo um cliente na cadeira">
+  <defs>
+    <linearGradient id="fundo" x1="0" y1="0" x2="0.4" y2="1">
+      <stop offset="0" stop-color="#eef2fb"/>
+      <stop offset="1" stop-color="#d7e0f6"/>
+    </linearGradient>
+    <linearGradient id="azul" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1e3d9e"/>
+      <stop offset="1" stop-color="#0b1b4d"/>
+    </linearGradient>
+    <linearGradient id="azulClaro" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2b52c4"/>
+      <stop offset="1" stop-color="#13287a"/>
+    </linearGradient>
+    <clipPath id="cortePoste">
+      <rect x="66" y="236" width="66" height="360" rx="33"/>
+    </clipPath>
+  </defs>
+
+  <rect width="820" height="860" fill="url(#fundo)"/>
+  <circle cx="470" cy="380" r="300" fill="#ffffff" opacity=".55"/>
+
+  <!-- Espelho da barbearia, ao fundo -->
+  <rect x="250" y="120" width="440" height="330" rx="28" fill="#ffffff" opacity=".55"/>
+  <rect x="250" y="120" width="440" height="330" rx="28" fill="none" stroke="#c6d2ee" stroke-width="6"/>
+
+  <!-- Poste de barbearia -->
+  <g>
+    <rect x="58" y="196" width="82" height="44" rx="16" fill="url(#azul)"/>
+    <rect x="58" y="592" width="82" height="44" rx="16" fill="url(#azul)"/>
+    <rect x="66" y="236" width="66" height="360" rx="33" fill="#ffffff"/>
+    <g clip-path="url(#cortePoste)">
+      <g fill="#ee3b14">
+        <path d="M-10 250h42l-86 86h-42z"/><path d="M-10 340h42l-86 86h-42z"/>
+        <path d="M-10 430h42l-86 86h-42z"/><path d="M-10 520h42l-86 86h-42z"/>
+      </g>
+      <g fill="#13287a" transform="translate(58 0)">
+        <path d="M-10 250h42l-86 86h-42z"/><path d="M-10 340h42l-86 86h-42z"/>
+        <path d="M-10 430h42l-86 86h-42z"/><path d="M-10 520h42l-86 86h-42z"/>
+      </g>
+    </g>
+    <rect x="66" y="236" width="66" height="360" rx="33" fill="none" stroke="#c6d2ee" stroke-width="5"/>
+  </g>
+
+  <ellipse cx="480" cy="806" rx="290" ry="26" fill="#0f1c3d" opacity=".09"/>
+
+  <!-- Barbeiro em pé, atrás -->
+  <g>
+    <path d="M552 806 L576 438 Q640 398 704 438 L730 806 Z" fill="url(#azulClaro)"/>
+    <rect x="616" y="352" width="48" height="66" fill="#0b1b4d"/>
+    <circle cx="640" cy="308" r="66" fill="#0b1b4d"/>
+    <path d="M578 296a62 62 0 0 1 124 0z" fill="#13287a"/>
+    <path d="M596 432 L640 480 L684 432" fill="none" stroke="#ee3b14" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Cliente sentado, à frente -->
+  <g>
+    <path d="M272 806 L330 594 Q400 554 470 594 L528 806 Z" fill="url(#azul)"/>
+    <path d="M330 594 Q400 554 470 594" fill="none" stroke="#ee3b14" stroke-width="14" stroke-linecap="round"/>
+    <rect x="376" y="530" width="48" height="66" rx="10" fill="#0b1b4d"/>
+    <circle cx="400" cy="486" r="70" fill="#13287a"/>
+    <path d="M330 478a70 70 0 0 1 140 0z" fill="#0b1b4d"/>
+    <circle cx="366" cy="498" r="9" fill="#8fa4d8" opacity=".85"/>
+  </g>
+
+  <!-- Braço do barbeiro segurando a máquina, por cima do cliente -->
+  <g>
+    <path d="M596 500 Q540 452 486 462" fill="none" stroke="#2b52c4" stroke-width="48" stroke-linecap="round"/>
+    <circle cx="480" cy="462" r="31" fill="#0b1b4d"/>
+    <g transform="rotate(-62 452 432)">
+      <rect x="418" y="392" width="70" height="84" rx="18" fill="#ee3b14"/>
+      <rect x="414" y="370" width="78" height="26" rx="10" fill="#0b1b4d"/>
+      <g stroke="#0b1b4d" stroke-width="6" stroke-linecap="round">
+        <path d="M428 368v-12M448 368v-12M468 368v-12M484 368v-12"/>
+      </g>
+      <rect x="434" y="418" width="38" height="10" rx="5" fill="#ffffff" opacity=".7"/>
+    </g>
+  </g>
+
+  <!-- Detalhes soltos -->
+  <circle cx="742" cy="222" r="13" fill="#ee3b14" opacity=".85"/>
+  <circle cx="778" cy="284" r="8" fill="#13287a" opacity=".45"/>
+  <path d="M726 700a54 54 0 0 1 54-54" fill="none" stroke="#ee3b14" stroke-width="11" stroke-linecap="round" opacity=".65"/>
+</svg>

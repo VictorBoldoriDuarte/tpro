@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="Pro Club por Toni Acessórios">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#17171c"/>
+      <stop offset="1" stop-color="#08080a"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="26%" cy="30%" r="70%">
+      <stop offset="0" stop-color="#d9a441" stop-opacity=".30"/>
+      <stop offset="1" stop-color="#d9a441" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#f0c97a"/>
+      <stop offset="1" stop-color="#b87333"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <rect x="40" y="40" width="1120" height="550" rx="28" fill="none" stroke="#d9a441" stroke-opacity=".28" stroke-width="2"/>
+  <text x="100" y="266" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="96" font-weight="700" letter-spacing="6" fill="url(#gold)">PRO CLUB</text>
+  <text x="104" y="322" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="30" letter-spacing="10" fill="#a1a1aa">POR TONI ACESSÓRIOS</text>
+  <text x="100" y="420" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="38" fill="#f4f4f5">Sua barbearia merece comprar como negócio.</text>
+  <text x="100" y="480" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="28" fill="#a1a1aa">Condições exclusivas para profissionais do setor.</text>
+</svg>
