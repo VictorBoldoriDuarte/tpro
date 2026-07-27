@@ -39,7 +39,7 @@ body.admin {
   gap: 0.85rem;
   width: min(420px, 100%);
   padding: clamp(1.5rem, 1rem + 2vw, 2.4rem);
-  background: #fff;
+  background: var(--tp-surface);
   border-radius: var(--tp-radius-lg);
   box-shadow: var(--tp-shadow-lg);
 }
@@ -71,7 +71,7 @@ body.admin {
 
 .login__demo code {
   padding: 0.05rem 0.35rem;
-  background: rgba(0, 0, 0, 0.07);
+  background: color-mix(in srgb, var(--tp-text) 12%, transparent);
   border-radius: var(--tp-radius-xs);
   font-weight: 700;
 }
@@ -229,7 +229,7 @@ body.admin {
   align-items: center;
   gap: 0.85rem;
   padding: 0.85rem clamp(1rem, 2vw, 1.75rem);
-  background: rgba(255, 255, 255, 0.96);
+  background: var(--tp-header-bg);
   backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--tp-border);
 }
@@ -270,7 +270,7 @@ body.admin {
 
 .kpi {
   padding: 1rem 1.1rem;
-  background: #fff;
+  background: var(--tp-surface);
   border: 1px solid var(--tp-border);
   border-radius: var(--tp-radius-md);
   box-shadow: var(--tp-shadow-xs);
@@ -307,6 +307,98 @@ body.admin {
   color: var(--tp-muted);
 }
 
+/* Caixa de membros: é um botão, mas se apresenta como cartão de indicador.
+   Clicar abre a seção "Membros" com a lista de assinantes. */
+.members-card {
+  display: grid;
+  gap: 0.2rem;
+  width: 100%;
+  margin-bottom: 1.25rem;
+  padding: 1.1rem 1.2rem;
+  background: var(--tp-surface);
+  border: 1px solid var(--tp-border);
+  border-left: 4px solid var(--tp-red);
+  border-radius: var(--tp-radius-md);
+  box-shadow: var(--tp-shadow-xs);
+  text-align: left;
+  transition: border-color var(--tp-t-fast), box-shadow var(--tp-t-fast);
+}
+
+.members-card:hover {
+  border-color: var(--tp-border-strong);
+  border-left-color: var(--tp-red);
+  box-shadow: var(--tp-shadow-sm);
+}
+
+.members-card__top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1rem;
+}
+
+.members-card__label {
+  flex: 1;
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--tp-muted);
+}
+
+.members-card__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--tp-red);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.members-card:hover .members-card__cta {
+  text-decoration: underline;
+}
+
+.members-card__total {
+  font-family: var(--tp-font-display);
+  font-size: 2.1rem;
+  font-style: italic;
+  font-weight: 900;
+  line-height: 1.1;
+  color: var(--tp-blue);
+}
+
+.members-card__hint {
+  font-size: 0.8rem;
+  color: var(--tp-muted);
+}
+
+/* Uma pastilha por tipo de assinatura — o recorte por plano pedido no painel */
+.members-card__plans {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.7rem;
+}
+
+.member-pill {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  padding: 0.3rem 0.7rem;
+  background: var(--tp-bg-soft);
+  border: 1px solid var(--tp-border);
+  border-radius: var(--tp-radius-pill);
+  font-size: 0.8rem;
+  color: var(--tp-text-soft);
+}
+
+.member-pill strong {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--tp-blue);
+}
+
 .panel-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -319,7 +411,7 @@ body.admin {
 
 .panel {
   padding: 1.1rem;
-  background: #fff;
+  background: var(--tp-surface);
   border: 1px solid var(--tp-border);
   border-radius: var(--tp-radius-md);
   box-shadow: var(--tp-shadow-xs);
@@ -482,7 +574,7 @@ body.admin {
   gap: 0.6rem;
   margin-bottom: 1rem;
   padding: 0.75rem;
-  background: #fff;
+  background: var(--tp-surface);
   border: 1px solid var(--tp-border);
   border-radius: var(--tp-radius-md);
   box-shadow: var(--tp-shadow-xs);
@@ -511,9 +603,15 @@ body.admin {
   min-width: 180px;
 }
 
+.toolbar__info {
+  margin-left: auto;
+  font-size: 0.82rem;
+  color: var(--tp-muted);
+}
+
 .table-wrap {
   overflow-x: auto;
-  background: #fff;
+  background: var(--tp-surface);
   border: 1px solid var(--tp-border);
   border-radius: var(--tp-radius-md);
   box-shadow: var(--tp-shadow-xs);
@@ -522,6 +620,11 @@ body.admin {
 .data-table {
   min-width: 900px;
   font-size: 0.87rem;
+}
+
+/* A tabela de membros tem cinco colunas curtas: não precisa dos 900px */
+.data-table--members {
+  min-width: 620px;
 }
 
 .data-table thead th {
@@ -643,7 +746,7 @@ body.admin {
   padding: 2.5rem 1rem;
   text-align: center;
   color: var(--tp-muted);
-  background: #fff;
+  background: var(--tp-surface);
   border: 1px dashed var(--tp-border-strong);
   border-radius: var(--tp-radius-md);
   margin-top: 0.75rem;
@@ -694,7 +797,7 @@ body.admin {
   flex-direction: column;
   gap: 0.8rem;
   padding: 1.2rem;
-  background: #fff;
+  background: var(--tp-surface);
   border: 1px solid var(--tp-border);
   border-radius: var(--tp-radius-md);
   box-shadow: var(--tp-shadow-xs);
@@ -813,7 +916,7 @@ body.admin {
   border: 2px solid var(--tp-border);
   border-radius: var(--tp-radius-sm);
   overflow: hidden;
-  background: #fff;
+  background: var(--tp-surface);
   cursor: grab;
 }
 
@@ -899,7 +1002,7 @@ body.admin {
 
 .disc-card {
   padding: 0.75rem;
-  background: #fff;
+  background: var(--tp-surface);
   border: 1px solid var(--tp-border);
   border-radius: var(--tp-radius-sm);
 }
@@ -951,7 +1054,7 @@ body.admin {
 .price-preview {
   margin-top: 0.85rem;
   padding: 0.7rem 0.9rem;
-  background: #fff;
+  background: var(--tp-surface);
   border-left: 3px solid var(--tp-red);
   border-radius: 0 var(--tp-radius-sm) var(--tp-radius-sm) 0;
   font-size: 0.84rem;
@@ -1002,7 +1105,119 @@ body.admin {
   }
 }
 
+/* ------------------------------------------------------------------
+   Tabelas viram cartões empilhados
+   No celular, rolar uma tabela de 900px na horizontal esconde metade da
+   informação. Aqui cada linha passa a ser um cartão e o nome da coluna
+   aparece à esquerda do valor, lido de `data-label` (escrito no admin.js).
+   ------------------------------------------------------------------ */
+@media (max-width: 760px) {
+  .table-wrap {
+    overflow-x: visible;
+    background: none;
+    border: 0;
+    box-shadow: none;
+  }
+
+  .data-table,
+  .data-table--members {
+    display: block;
+    min-width: 0;
+  }
+
+  .data-table thead {
+    display: none;
+  }
+
+  .data-table tbody {
+    display: grid;
+    gap: 0.7rem;
+  }
+
+  .data-table tbody tr,
+  .data-table tbody tr:hover {
+    display: grid;
+    gap: 0.45rem;
+    padding: 0.9rem;
+    background: var(--tp-surface);
+    border: 1px solid var(--tp-border);
+    border-radius: var(--tp-radius-md);
+    box-shadow: var(--tp-shadow-xs);
+  }
+
+  /* Só `.data-table td` aqui: incluir `tr:last-child td` subiria a
+     especificidade acima da regra de `td:first-child` abaixo e o nome do
+     produto do último cartão cairia na coluna estreita do rótulo. */
+  .data-table td {
+    display: grid;
+    grid-template-columns: 7.5rem minmax(0, 1fr);
+    align-items: center;
+    /* start: senão o selo de situação esticaria por toda a coluna */
+    justify-items: start;
+    gap: 0.6rem;
+    padding: 0;
+    border-bottom: 0;
+  }
+
+  .data-table td::before {
+    content: attr(data-label);
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--tp-muted);
+  }
+
+  /* A primeira coluna é o nome: vira o título do cartão, sem rótulo */
+  .data-table td:first-child {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .data-table td:first-child::before {
+    display: none;
+  }
+
+  /* O nome do produto pode ocupar duas linhas dentro do cartão */
+  .cell-product {
+    min-width: 0;
+  }
+
+  .cell-product__name {
+    white-space: normal;
+  }
+
+  .cell-actions {
+    justify-content: flex-start;
+  }
+}
+
 @media (max-width: 620px) {
+  .topbar {
+    gap: 0.5rem;
+    padding-inline: 0.85rem;
+  }
+
+  /* Dois indicadores por linha em vez de um: a visão geral tem cinco cartões
+     e um por linha empurrava todo o resto para fora da primeira tela. */
+  .kpis {
+    grid-template-columns: repeat(auto-fit, minmax(138px, 1fr));
+    gap: 0.6rem;
+  }
+
+  .kpi {
+    padding: 0.75rem 0.85rem;
+  }
+
+  .kpi__value {
+    font-size: 1.5rem;
+  }
+
+  /* Indicador em reais: ocupa a linha inteira para o valor não quebrar
+     no meio ("R$ 167.592," / "00") */
+  .kpi--wide {
+    grid-column: 1 / -1;
+  }
+
   .topbar__title {
     font-size: 1.05rem;
   }
@@ -1020,11 +1235,42 @@ body.admin {
     min-width: 0;
   }
 
+  .toolbar__info {
+    margin-left: 0;
+  }
+
+  .members-card__total {
+    font-size: 1.8rem;
+  }
+
   .pform__foot {
     flex-direction: column-reverse;
   }
 
   .pform__foot .tp-btn {
     width: 100%;
+  }
+
+  /* Grade da ficha do produto: uma coluna por vez em tela estreita */
+  .pform__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* Enviar imagens e colar endereço, um embaixo do outro: lado a lado sobram
+     uns 150px para cada um. O min-width de 260px ainda estourava a tela. */
+  .img-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .img-url {
+    flex-direction: column;
+    align-items: stretch;
+    min-width: 0;
+  }
+
+  /* Este campo tem fonte própria e escaparia do 16px que evita o zoom do iOS */
+  .img-url .tp-input {
+    font-size: 16px;
   }
 }

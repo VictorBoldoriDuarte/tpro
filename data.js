@@ -32,7 +32,8 @@ window.TPRO = (() => {
     catalog: "tpro.catalog.v1",
     cart: "tpro.cart.v1",
     plan: "tpro.plan.v1",
-    admin: "tpro.admin.v1"
+    admin: "tpro.admin.v1",
+    members: "tpro.members.v1"
   };
 
   const IMG = "assets/images/";
@@ -686,6 +687,159 @@ window.TPRO = (() => {
 
 
   /* ========================================================================
+     06b. MEMBROS DO CLUBE
+     ------------------------------------------------------------------------
+     Quem já assinou, em qual plano, quando entrou e quando vence. O painel
+     usa isto para contar assinantes por tipo de assinatura e listar nomes
+     com as duas datas.
+
+     ATENÇÃO: nesta demonstração a lista é fixa (os nomes abaixo). Não existe
+     fluxo de cadastro nem cobrança — cadastrar, renovar e cancelar entram
+     junto com o backend, e é `readMembers()` que passa a chamar a API.
+     ======================================================================== */
+
+  const DAY_MS = 86400000;
+
+  /**
+   * Membros de demonstração descritos por deslocamento de dias, não por data
+   * fixa: assim a lista nunca aparece vencida numa apresentação futura.
+   *
+   * `joinedDaysAgo` → entrou há N dias
+   * `cycleDays`     → duração contratada (365 = anual, 730 = dois anos)
+   *
+   * O vencimento é `joinedAt + cycleDays`, então as duas datas caem sempre no
+   * mesmo dia do calendário e o ciclo fica coerente. Quem entrou há mais dias
+   * do que o ciclo contratado aparece com a assinatura vencida — é assim que
+   * a lista mostra os três estados (em dia, a vencer e vencida).
+   */
+  const DEMO_MEMBERS = [
+    { name: "Anderson Ribeiro", plan: "elite", joinedDaysAgo: 402, cycleDays: 730 },
+    { name: "Bruno Tavares", plan: "pro", joinedDaysAgo: 318, cycleDays: 365 },
+    { name: "Carlos Eduardo Pinho", plan: "basic", joinedDaysAgo: 264, cycleDays: 365 },
+    { name: "Daniel Matoso", plan: "pro", joinedDaysAgo: 356, cycleDays: 365 }, // vence em 9 dias
+    { name: "Eduardo Sampaio", plan: "elite", joinedDaysAgo: 578, cycleDays: 730 },
+    { name: "Fábio Queiroz", plan: "basic", joinedDaysAgo: 377, cycleDays: 365 }, // venceu
+    { name: "Gustavo Lemes", plan: "pro", joinedDaysAgo: 168, cycleDays: 365 },
+    { name: "Henrique Bastos", plan: "pro", joinedDaysAgo: 141, cycleDays: 365 },
+    { name: "Igor Nakamura", plan: "elite", joinedDaysAgo: 485, cycleDays: 730 },
+    { name: "Jonas Villalba", plan: "basic", joinedDaysAgo: 361, cycleDays: 365 }, // vence em 4 dias
+    { name: "Leandro Cardoso", plan: "pro", joinedDaysAgo: 74, cycleDays: 365 },
+    { name: "Marcelo Arruda", plan: "basic", joinedDaysAgo: 58, cycleDays: 365 },
+    { name: "Nelson Prates", plan: "pro", joinedDaysAgo: 41, cycleDays: 365 },
+    { name: "Otávio Dorneles", plan: "elite", joinedDaysAgo: 27, cycleDays: 365 },
+    { name: "Rafael Iizuka", plan: "pro", joinedDaysAgo: 12, cycleDays: 365 },
+    { name: "Sérgio Mendonça", plan: "basic", joinedDaysAgo: 3, cycleDays: 365 }
+  ];
+
+  /** Quantos dias faltam para vencer (negativo se já venceu). */
+  function daysUntil(isoDate) {
+    const target = new Date(isoDate);
+    if (Number.isNaN(target.getTime())) return 0;
+
+    // Comparação por dia, não por hora: senão "vence hoje" viraria "vencido"
+    const startOfDay = (date) => new Date(date.getFullYear(), date.getMonth(), date.getDate());
+    return Math.round((startOfDay(target) - startOfDay(new Date())) / DAY_MS);
+  }
+
+  function defaultMembers() {
+    const now = Date.now();
+
+    return DEMO_MEMBERS.map((member, index) => {
+      const joined = now - member.joinedDaysAgo * DAY_MS;
+
+      return {
+        id: `mem-${String(index + 1).padStart(3, "0")}`,
+        name: member.name,
+        plan: member.plan,
+        joinedAt: new Date(joined).toISOString(),
+        expiresAt: new Date(joined + member.cycleDays * DAY_MS).toISOString()
+      };
+    });
+  }
+
+  function normalizeMember(raw, index) {
+    const validPlan = readCatalog().plans.some((plan) => plan.id === raw?.plan);
+
+    return {
+      id: raw?.id || uid("mem"),
+      name: String(raw?.name || "Assinante sem nome"),
+      plan: validPlan ? raw.plan : "basic",
+      joinedAt: raw?.joinedAt || new Date().toISOString(),
+      expiresAt: raw?.expiresAt || new Date(Date.now() + 365 * DAY_MS).toISOString(),
+      order: Number.isFinite(Number(raw?.order)) ? Number(raw.order) : index
+    };
+  }
+
+  let membersCache = null;
+
+  function readMembers() {
+    if (membersCache) return membersCache;
+
+    let stored = null;
+    try {
+      const raw = window.localStorage.getItem(KEYS.members);
+      if (raw) stored = JSON.parse(raw);
+    } catch (error) {
+      console.warn("TPRO: lista de membros salva inválida, voltando para a demonstração.", error);
+    }
+
+    const base = Array.isArray(stored) && stored.length ? stored : defaultMembers();
+    membersCache = base.map(normalizeMember);
+    return membersCache;
+  }
+
+  /**
+   * Situação da assinatura, derivada da data de vencimento.
+   * "vencendo" é o aviso de renovação: 30 dias ou menos.
+   */
+  function memberStatus(member) {
+    const days = daysUntil(member.expiresAt);
+    if (days < 0) return "vencido";
+    if (days <= 30) return "vencendo";
+    return "ativo";
+  }
+
+  /** Membros em ordem alfabética, já com situação e dias restantes calculados. */
+  function getMembers() {
+    return readMembers()
+      .map((member) => ({
+        ...member,
+        status: memberStatus(member),
+        daysLeft: daysUntil(member.expiresAt)
+      }))
+      .sort((a, b) => a.name.localeCompare(b.name, "pt-BR"));
+  }
+
+  const getMembersByPlan = (planId) => getMembers().filter((member) => member.plan === planId);
+
+  /**
+   * Resumo usado no card da visão geral: total do clube, quantos por plano e
+   * quantos precisam de atenção.
+   */
+  function getMemberSummary() {
+    const members = getMembers();
+
+    return {
+      total: members.length,
+      active: members.filter((member) => member.status !== "vencido").length,
+      expiring: members.filter((member) => member.status === "vencendo").length,
+      expired: members.filter((member) => member.status === "vencido").length,
+      byPlan: getPlans().map((plan) => ({
+        id: plan.id,
+        name: plan.name,
+        count: members.filter((member) => member.plan === plan.id).length
+      }))
+    };
+  }
+
+  /** ISO → "12/03/2026" */
+  function formatDate(isoDate) {
+    const date = new Date(isoDate);
+    return Number.isNaN(date.getTime()) ? "—" : date.toLocaleDateString("pt-BR");
+  }
+
+
+  /* ========================================================================
      07. ESCRITA DO PAINEL, IMPORTAR / EXPORTAR / RESTAURAR
      ======================================================================== */
 
@@ -863,6 +1017,7 @@ window.TPRO = (() => {
     // utilidades
     formatCurrency,
     formatPercent,
+    formatDate,
     parseMoneyToCents,
     parsePercentToRate,
     slugify,
@@ -879,6 +1034,11 @@ window.TPRO = (() => {
     getProductById,
     getBrands,
     countProductsInCategory,
+
+    // membros do clube
+    getMembers,
+    getMembersByPlan,
+    getMemberSummary,
 
     // preços
     discountFor,

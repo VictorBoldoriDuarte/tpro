@@ -9,6 +9,7 @@
    02. Entrada (login demonstrativo)
    03. Navegação entre seções
    04. Visão geral
+   04b. Membros do clube
    05. Produtos (tabela)
    06. Ficha do produto
    07. Imagens
@@ -39,12 +40,14 @@
   const VIEWS = {
     painel: { title: "Visão geral", sub: "Resumo do catálogo do clube" },
     produtos: { title: "Produtos", sub: "Cadastre, edite e defina o desconto de cada item" },
+    membros: { title: "Membros do clube", sub: "Assinantes por plano, data de entrada e vencimento" },
     categorias: { title: "Categorias", sub: "Organize o catálogo por tipo de produto" },
     planos: { title: "Planos e descontos", sub: "Preço da assinatura e desconto padrão de cada nível" },
     dados: { title: "Dados e backup", sub: "Exportar, importar e restaurar o catálogo" }
   };
 
   const filters = { search: "", category: "", status: "" };
+  const memberFilters = { plan: "", status: "" };
 
   /** Rascunho da ficha aberta: imagens ainda não salvas ficam aqui. */
   let draftImages = [];
@@ -182,7 +185,9 @@
       {
         label: "Valor do estoque",
         value: TPRO.formatCurrency(stockValueCents),
-        hint: "preço cheio × unidades"
+        hint: "preço cheio × unidades",
+        // Valor em reais não cabe em meia linha no celular (ver admin.css)
+        variant: "kpi--wide"
       }
     ];
 
@@ -272,6 +277,199 @@
 
 
   /* ========================================================================
+     04b. MEMBROS DO CLUBE
+     ------------------------------------------------------------------------
+     A caixa da visão geral conta os assinantes de cada tipo de assinatura e
+     leva para esta seção, que lista nome, entrada e vencimento.
+     ======================================================================== */
+
+  const MEMBER_STATUS = {
+    ativo: { label: "Em dia", badge: "tp-badge--success" },
+    vencendo: { label: "Renovar", badge: "tp-badge--warning" },
+    vencido: { label: "Vencida", badge: "tp-badge--red" }
+  };
+
+  /** Caixa clicável da visão geral. */
+  function renderMembersCard() {
+    const summary = TPRO.getMemberSummary();
+
+    const total = $("[data-members-total]");
+    if (total) total.textContent = String(summary.total);
+
+    const hint = $("[data-members-hint]");
+    if (hint) {
+      // O aviso mais urgente primeiro: vencida > a vencer > tudo em dia
+      if (summary.expired) {
+        hint.textContent = `${summary.expired} assinatura(s) vencida(s) — clique para ver quem é`;
+      } else if (summary.expiring) {
+        hint.textContent = `${summary.expiring} assinatura(s) vencem nos próximos 30 dias`;
+      } else {
+        hint.textContent = "todas as assinaturas em dia";
+      }
+    }
+
+    const plans = $("[data-members-by-plan]");
+    if (plans) {
+      plans.textContent = "";
+      summary.byPlan.forEach((plan) => {
+        const pill = document.createElement("span");
+        pill.className = "member-pill";
+        pill.innerHTML = `<strong>${plan.count}</strong> ${escapeHtml(plan.name)}`;
+        plans.appendChild(pill);
+      });
+    }
+
+    const badge = $("[data-side-count-members]");
+    if (badge) badge.textContent = String(summary.total);
+  }
+
+  function renderMembers() {
+    renderMembersCard();
+    fillMemberPlanSelect();
+    renderMemberKpis();
+    renderMembersTable();
+  }
+
+  /** Opções do filtro por assinatura, geradas a partir dos planos cadastrados. */
+  function fillMemberPlanSelect() {
+    const select = $("[data-member-plan]");
+    if (!select) return;
+
+    const current = select.value;
+    select.textContent = "";
+
+    const all = document.createElement("option");
+    all.value = "";
+    all.textContent = "Todas as assinaturas";
+    select.appendChild(all);
+
+    TPRO.getPlans().forEach((plan) => {
+      const option = document.createElement("option");
+      option.value = plan.id;
+      option.textContent = `Assinatura ${plan.name}`;
+      select.appendChild(option);
+    });
+
+    select.value = current;
+    if (select.value !== current) memberFilters.plan = select.value;
+  }
+
+  function renderMemberKpis() {
+    const box = $("[data-member-kpis]");
+    if (!box) return;
+
+    const summary = TPRO.getMemberSummary();
+
+    const cards = [
+      { label: "Total de membros", value: String(summary.total), hint: "assinantes no clube" },
+      ...summary.byPlan.map((plan) => ({
+        label: `Assinatura ${plan.name}`,
+        value: String(plan.count),
+        hint: summary.total ? `${Math.round((plan.count / summary.total) * 100)}% do clube` : "sem membros"
+      })),
+      {
+        label: "Precisam renovar",
+        value: String(summary.expiring + summary.expired),
+        hint: `${summary.expired} vencida(s) · ${summary.expiring} a vencer`,
+        variant: summary.expiring + summary.expired ? "kpi--red" : ""
+      }
+    ];
+
+    box.textContent = "";
+    cards.forEach((card) => {
+      const item = document.createElement("li");
+      item.className = `kpi ${card.variant || ""}`.trim();
+      item.innerHTML = `
+        <p class="kpi__label">${escapeHtml(card.label)}</p>
+        <p class="kpi__value">${escapeHtml(card.value)}</p>
+        <p class="kpi__hint">${escapeHtml(card.hint)}</p>`;
+      box.appendChild(item);
+    });
+  }
+
+  function renderMembersTable() {
+    const body = $("[data-member-rows]");
+    const empty = $("[data-member-empty]");
+    const count = $("[data-member-count]");
+    if (!body) return;
+
+    const rows = TPRO.getMembers().filter((member) => {
+      if (memberFilters.plan && member.plan !== memberFilters.plan) return false;
+      if (memberFilters.status && member.status !== memberFilters.status) return false;
+      return true;
+    });
+
+    body.textContent = "";
+    if (empty) empty.hidden = rows.length > 0;
+    if (count) {
+      count.textContent = rows.length === 1 ? "1 assinante" : `${rows.length} assinantes`;
+    }
+
+    rows.forEach((member) => body.appendChild(buildMemberRow(member)));
+  }
+
+  function buildMemberRow(member) {
+    const tr = document.createElement("tr");
+    const status = MEMBER_STATUS[member.status] || MEMBER_STATUS.ativo;
+    const plan = TPRO.getPlanById(member.plan);
+
+    // Nome
+    const tdName = document.createElement("td");
+    tdName.dataset.label = "Assinante";
+    const name = document.createElement("p");
+    name.className = "cell-product__name";
+    name.textContent = member.name;
+    tdName.appendChild(name);
+
+    // Assinatura
+    const tdPlan = document.createElement("td");
+    tdPlan.dataset.label = "Assinatura";
+    const planBadge = document.createElement("span");
+    planBadge.className = "tp-badge tp-badge--soft";
+    planBadge.textContent = plan ? plan.name : member.plan;
+    tdPlan.appendChild(planBadge);
+
+    // Data de inscrição
+    const tdJoined = document.createElement("td");
+    tdJoined.dataset.label = "Entrou em";
+    tdJoined.className = "cell-price";
+    tdJoined.textContent = TPRO.formatDate(member.joinedAt);
+
+    // Data de vencimento
+    const tdExpires = document.createElement("td");
+    tdExpires.dataset.label = "Vence em";
+    tdExpires.className = "cell-price";
+    tdExpires.textContent = TPRO.formatDate(member.expiresAt);
+
+    // Situação
+    const tdStatus = document.createElement("td");
+    tdStatus.dataset.label = "Situação";
+    const statusBadge = document.createElement("span");
+    statusBadge.className = `tp-badge ${status.badge}`;
+    statusBadge.textContent = status.label;
+    statusBadge.title = member.daysLeft < 0
+      ? `Venceu há ${Math.abs(member.daysLeft)} dia(s)`
+      : `Faltam ${member.daysLeft} dia(s)`;
+    tdStatus.appendChild(statusBadge);
+
+    tr.append(tdName, tdPlan, tdJoined, tdExpires, tdStatus);
+    return tr;
+  }
+
+  function initMemberFilters() {
+    $("[data-member-plan]")?.addEventListener("change", (event) => {
+      memberFilters.plan = event.target.value;
+      renderMembersTable();
+    });
+
+    $("[data-member-status]")?.addEventListener("change", (event) => {
+      memberFilters.status = event.target.value;
+      renderMembersTable();
+    });
+  }
+
+
+  /* ========================================================================
      05. PRODUTOS (TABELA)
      ======================================================================== */
 
@@ -307,6 +505,7 @@
 
     // Produto
     const tdProduct = document.createElement("td");
+    tdProduct.dataset.label = "Produto";
     const cell = document.createElement("div");
     cell.className = "cell-product";
 
@@ -333,15 +532,18 @@
 
     // Categoria
     const tdCategory = document.createElement("td");
+    tdCategory.dataset.label = "Categoria";
     tdCategory.textContent = TPRO.getCategoryName(product.category);
 
     // Preço
     const tdPrice = document.createElement("td");
+    tdPrice.dataset.label = "Preço cheio";
     tdPrice.className = "cell-price";
     tdPrice.textContent = TPRO.formatCurrency(product.priceCents);
 
     // Descontos
     const tdDiscounts = document.createElement("td");
+    tdDiscounts.dataset.label = "Descontos";
     const discounts = document.createElement("div");
     discounts.className = "cell-discounts";
     TPRO.getPlans().forEach((plan) => {
@@ -356,6 +558,7 @@
 
     // Estoque
     const tdStock = document.createElement("td");
+    tdStock.dataset.label = "Estoque";
     const stockBadge = document.createElement("span");
     stockBadge.className =
       product.stock <= 0 ? "tp-badge tp-badge--warning" : "tp-badge tp-badge--muted";
@@ -364,6 +567,7 @@
 
     // Situação
     const tdStatus = document.createElement("td");
+    tdStatus.dataset.label = "Situação";
     const statusBadge = document.createElement("span");
     statusBadge.className = product.active ? "tp-badge tp-badge--success" : "tp-badge tp-badge--muted";
     statusBadge.textContent = product.active ? "Ativo" : "Inativo";
@@ -378,6 +582,7 @@
 
     // Ações
     const tdActions = document.createElement("td");
+    tdActions.dataset.label = "Ações";
     const actions = document.createElement("div");
     actions.className = "cell-actions";
 
@@ -1162,6 +1367,7 @@
   function renderAll() {
     fillCategorySelects();
     renderDashboard();
+    renderMembers();
     renderProductsTable();
     renderCategories();
     renderPlans();
@@ -1172,6 +1378,7 @@
     initLogin();
     initNav();
     initProductFilters();
+    initMemberFilters();
     initProductForm();
     initImageControls();
     initCategoryForm();

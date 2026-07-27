@@ -113,7 +113,7 @@ body.home {
   position: relative;
   padding-top: clamp(1.5rem, 1rem + 3vw, 3.5rem);
   padding-bottom: clamp(3rem, 2rem + 4vw, 4.5rem);
-  background: linear-gradient(180deg, #ffffff 0%, #eef2fb 62%, #ffffff 100%);
+  background: linear-gradient(180deg, var(--tp-bg) 0%, var(--tp-bg-mute) 62%, var(--tp-bg) 100%);
   overflow: hidden;
 }
 
@@ -209,7 +209,7 @@ body.home {
   bottom: 18px;
   width: min(270px, 78%);
   padding: 1rem 1.1rem;
-  background: #fff;
+  background: var(--tp-surface);
   border: 1px solid var(--tp-border);
   border-radius: var(--tp-radius-md);
   box-shadow: var(--tp-shadow-lg);
@@ -282,7 +282,7 @@ body.home {
   gap: 0;
   margin-top: clamp(1.5rem, 3vw, 2.75rem);
   padding: clamp(1rem, 2vw, 1.5rem);
-  background: #fff;
+  background: var(--tp-surface);
   border: 1px solid var(--tp-border);
   border-radius: var(--tp-radius-lg);
   box-shadow: var(--tp-shadow-md);
@@ -371,7 +371,7 @@ body.home {
   justify-content: center;
   gap: 0.75rem;
   padding: clamp(1rem, 2vw, 1.5rem);
-  background: #fff;
+  background: var(--tp-surface);
   border: 1px solid var(--tp-border);
   border-radius: var(--tp-radius-lg);
   box-shadow: var(--tp-shadow-sm);
@@ -465,7 +465,7 @@ body.home {
   flex-direction: column;
   align-items: center;
   padding: 1.1rem 1rem 1.25rem;
-  background: #fff;
+  background: var(--tp-surface);
   border: 1px solid var(--tp-border);
   border-radius: var(--tp-radius-lg);
   box-shadow: var(--tp-shadow-sm);
@@ -554,7 +554,7 @@ body.home {
   display: flex;
   flex-direction: column;
   padding: 1.5rem 1.4rem;
-  background: #fff;
+  background: var(--tp-surface);
   border: 1.5px solid var(--tp-border);
   border-radius: var(--tp-radius-lg);
   box-shadow: var(--tp-shadow-sm);
@@ -800,7 +800,7 @@ body.home {
   align-items: center;
   gap: 0.75rem;
   padding: 0.75rem 0.95rem;
-  background: #fff;
+  background: var(--tp-surface);
   border: 1px solid var(--tp-border);
   border-radius: var(--tp-radius-md);
 }
@@ -856,7 +856,7 @@ body.home {
   flex-direction: column;
   gap: 0.7rem;
   padding: 1.4rem;
-  background: #fff;
+  background: var(--tp-surface);
   border: 1px solid var(--tp-border);
   border-radius: var(--tp-radius-lg);
   box-shadow: var(--tp-shadow-sm);
@@ -1022,7 +1022,7 @@ body.home {
 }
 
 .accordion__item {
-  background: #fff;
+  background: var(--tp-surface);
   border: 1px solid var(--tp-border);
   border-radius: var(--tp-radius-md);
   overflow: hidden;
@@ -1176,6 +1176,11 @@ body.home {
   .nav-toggle {
     display: grid;
     place-items: center;
+    margin-left: 0; /* quem empurra o par de botões para a direita é o tema */
+  }
+
+  .home-header__inner .tp-theme-toggle {
+    margin-left: auto;
   }
 
   .home-nav {
@@ -1190,7 +1195,7 @@ body.home {
     width: min(300px, 84vw);
     height: 100dvh;
     padding: calc(var(--tp-header-h) + 1rem) 1.25rem 1.5rem;
-    background: #fff;
+    background: var(--tp-surface);
     box-shadow: var(--tp-shadow-lg);
     transform: translateX(102%);
     transition: transform var(--tp-t);

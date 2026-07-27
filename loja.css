@@ -39,7 +39,7 @@ body.loja {
   align-items: center;
   flex: 1;
   max-width: 620px;
-  background: #fff;
+  background: var(--tp-surface);
   border: 1.5px solid var(--tp-border-strong);
   border-radius: var(--tp-radius-sm);
   transition: border-color var(--tp-t-fast), box-shadow var(--tp-t-fast);
@@ -199,7 +199,7 @@ body.loja {
 }
 
 .plan-pill[aria-checked="true"] {
-  background: #fff;
+  background: #fff; /* sobre a faixa azul: branco fixo nos dois temas */
   color: var(--tp-blue);
 }
 
@@ -219,7 +219,7 @@ body.loja {
    02. FAIXA DE CATEGORIAS
    ========================================================================== */
 .cat-strip {
-  background: #fff;
+  background: var(--tp-surface);
   border-bottom: 1px solid var(--tp-border);
 }
 
@@ -289,7 +289,7 @@ body.loja {
   max-height: calc(100dvh - var(--tp-header-h) - 76px);
   overflow-y: auto;
   padding: 1.1rem;
-  background: #fff;
+  background: var(--tp-surface);
   border: 1px solid var(--tp-border);
   border-radius: var(--tp-radius-md);
   box-shadow: var(--tp-shadow-xs);
@@ -385,7 +385,7 @@ body.loja {
   padding: 0.28rem 0.65rem;
   border: 1px solid var(--tp-border-strong);
   border-radius: var(--tp-radius-pill);
-  background: #fff;
+  background: var(--tp-surface);
   color: var(--tp-text-soft);
   font-size: 0.78rem;
   font-weight: 600;
@@ -413,7 +413,7 @@ body.loja {
   align-items: center;
   gap: 0.75rem;
   padding: 0.7rem 0.9rem;
-  background: #fff;
+  background: var(--tp-surface);
   border: 1px solid var(--tp-border);
   border-radius: var(--tp-radius-md);
   box-shadow: var(--tp-shadow-xs);
@@ -487,7 +487,7 @@ body.loja {
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  background: rgba(19, 40, 122, 0.14);
+  background: color-mix(in srgb, var(--tp-blue) 20%, transparent);
   color: inherit;
   font-size: 0.7rem;
   line-height: 1;
@@ -511,7 +511,7 @@ body.loja {
 
 .product-card {
   display: flex;
-  background: #fff;
+  background: var(--tp-surface);
   border: 1px solid var(--tp-border);
   border-radius: var(--tp-radius-md);
   overflow: hidden;
@@ -692,7 +692,7 @@ body.loja {
   padding-inline: 0.7rem;
   border: 1.5px solid var(--tp-border-strong);
   border-radius: var(--tp-radius-sm);
-  background: #fff;
+  background: var(--tp-surface);
   color: var(--tp-text-soft);
   font-size: 0.88rem;
   font-weight: 700;
@@ -721,7 +721,7 @@ body.loja {
   gap: 0.6rem;
   margin-top: 1rem;
   padding: clamp(2.5rem, 6vw, 4.5rem) 1.5rem;
-  background: #fff;
+  background: var(--tp-surface);
   border: 1px dashed var(--tp-border-strong);
   border-radius: var(--tp-radius-md);
   text-align: center;
@@ -1026,7 +1026,7 @@ body.loja {
   flex-direction: column;
   width: min(430px, 100%);
   height: 100%;
-  background: #fff;
+  background: var(--tp-surface);
   box-shadow: var(--tp-shadow-lg);
   animation: drawer-in 260ms var(--tp-ease);
 }

@@ -7,6 +7,7 @@
 
    Sumário
    01. Tokens (:root)
+   01b. Tema escuro (tokens invertidos)
    02. Reset e base
    03. Tipografia e utilitários
    04. Botões
@@ -14,7 +15,9 @@
    06. Selos, tags e avisos
    07. Cabeçalho e rodapé
    08. Modal e toast
-   09. Redução de movimento
+   09. Interruptor de tema
+   10. Ajustes de celular
+   11. Redução de movimento
    ========================================================================== */
 
 
@@ -32,11 +35,15 @@
   --tp-red-dark: #c42d0c;
   --tp-red-soft: #fdeee8;
 
-  /* Superfícies */
+  /* Superfícies
+     --tp-surface é o fundo de todo card, campo, modal e painel. É este token
+     que o tema escuro troca — por isso nenhum arquivo deve escrever #fff
+     direto num fundo de card. */
   --tp-bg: #ffffff;
   --tp-bg-soft: #f4f6fc;
   --tp-bg-mute: #eef1f8;
   --tp-surface: #ffffff;
+  --tp-header-bg: rgba(255, 255, 255, 0.96);
 
   /* Texto */
   --tp-text: #0f1c3d;
@@ -56,7 +63,7 @@
   /* Gradientes */
   --tp-gradient-blue: linear-gradient(135deg, #1e3d9e 0%, #13287a 55%, #0b1b4d 100%);
   --tp-gradient-red: linear-gradient(135deg, #ff5a2c 0%, #ee3b14 55%, #c42d0c 100%);
-  --tp-gradient-soft: linear-gradient(180deg, #ffffff 0%, #f4f6fc 100%);
+  --tp-gradient-soft: linear-gradient(180deg, var(--tp-bg) 0%, var(--tp-bg-soft) 100%);
 
   /* Sombras */
   --tp-shadow-xs: 0 1px 2px rgba(15, 28, 61, 0.06);
@@ -85,6 +92,110 @@
   --tp-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
   --tp-t-fast: 150ms var(--tp-ease);
   --tp-t: 250ms var(--tp-ease);
+
+  /* Alterna qual ícone do botão de tema aparece, sem repetir seletor */
+  --tp-icon-sun: none;
+  --tp-icon-moon: block;
+
+  color-scheme: light;
+}
+
+
+/* ==========================================================================
+   01b. TEMA ESCURO
+
+   Só tokens são trocados — nenhum componente tem regra própria de tema.
+   O azul-marinho continua sendo a cor de estrutura, mas clareado, porque
+   #13287a sobre fundo escuro perde legibilidade. O laranja da marca
+   (--tp-red) não muda: é o ponto de contraste nos dois temas.
+
+   `data-theme` é escrito no <html> por theme-toggle.js:
+     data-theme="dark"  → escuro sempre
+     data-theme="light" → claro sempre
+     sem atributo       → segue o sistema (media query abaixo)
+   ========================================================================== */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --tp-blue: #7f9bff;
+    --tp-blue-dark: #0d1730;
+    --tp-blue-mid: #98b0ff;
+    --tp-blue-soft: #1c2647;
+
+    --tp-bg: #0b1020;
+    --tp-bg-soft: #0f1527;
+    --tp-bg-mute: #1a2138;
+    --tp-surface: #141b2e;
+    --tp-header-bg: rgba(11, 16, 32, 0.94);
+
+    --tp-text: #e9edf8;
+    --tp-text-soft: #b3bdd4;
+    --tp-muted: #8391ae;
+
+    --tp-border: #26304a;
+    --tp-border-strong: #38445f;
+
+    --tp-red-soft: #37170f;
+    --tp-success: #35c07d;
+    --tp-success-soft: #10301f;
+    --tp-warning: #e5a13a;
+    --tp-warning-soft: #34260d;
+
+    --tp-shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.4);
+    --tp-shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.45);
+    --tp-shadow-md: 0 10px 30px rgba(0, 0, 0, 0.5);
+    --tp-shadow-lg: 0 24px 60px rgba(0, 0, 0, 0.6);
+    --tp-shadow-blue: 0 12px 30px rgba(0, 0, 0, 0.45);
+    --tp-shadow-red: 0 12px 30px rgba(238, 59, 20, 0.3);
+
+    --tp-gradient-blue: linear-gradient(135deg, #1b2b58 0%, #16224a 55%, #0d1730 100%);
+
+    --tp-icon-sun: block;
+    --tp-icon-moon: none;
+
+    color-scheme: dark;
+  }
+}
+
+/* Escolha explícita do usuário: vale mesmo contra a preferência do sistema.
+   Duplicado de propósito — CSS não tem como reaproveitar um bloco de tokens. */
+:root[data-theme="dark"] {
+  --tp-blue: #7f9bff;
+  --tp-blue-dark: #0d1730;
+  --tp-blue-mid: #98b0ff;
+  --tp-blue-soft: #1c2647;
+
+  --tp-bg: #0b1020;
+  --tp-bg-soft: #0f1527;
+  --tp-bg-mute: #1a2138;
+  --tp-surface: #141b2e;
+  --tp-header-bg: rgba(11, 16, 32, 0.94);
+
+  --tp-text: #e9edf8;
+  --tp-text-soft: #b3bdd4;
+  --tp-muted: #8391ae;
+
+  --tp-border: #26304a;
+  --tp-border-strong: #38445f;
+
+  --tp-red-soft: #37170f;
+  --tp-success: #35c07d;
+  --tp-success-soft: #10301f;
+  --tp-warning: #e5a13a;
+  --tp-warning-soft: #34260d;
+
+  --tp-shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --tp-shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.45);
+  --tp-shadow-md: 0 10px 30px rgba(0, 0, 0, 0.5);
+  --tp-shadow-lg: 0 24px 60px rgba(0, 0, 0, 0.6);
+  --tp-shadow-blue: 0 12px 30px rgba(0, 0, 0, 0.45);
+  --tp-shadow-red: 0 12px 30px rgba(238, 59, 20, 0.3);
+
+  --tp-gradient-blue: linear-gradient(135deg, #1b2b58 0%, #16224a 55%, #0d1730 100%);
+
+  --tp-icon-sun: block;
+  --tp-icon-moon: none;
+
+  color-scheme: dark;
 }
 
 
@@ -119,7 +230,12 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-body.is-locked {
+/* Trava a rolagem do fundo enquanto menu, filtros, carrinho ou modal estão
+   abertos. O <html> precisa entrar na regra: como ele tem `overflow-x: clip`,
+   o navegador não propaga mais o overflow do <body> para a janela, e só o
+   `body { overflow: hidden }` deixaria a página rolar atrás do painel. */
+body.is-locked,
+html:has(body.is-locked) {
   overflow: hidden;
 }
 
@@ -175,7 +291,7 @@ table {
 }
 
 ::selection {
-  background: rgba(19, 40, 122, 0.15);
+  background: color-mix(in srgb, var(--tp-blue) 28%, transparent);
 }
 
 
@@ -376,7 +492,7 @@ p {
 
 .tp-btn--outline {
   border-color: var(--tp-border-strong);
-  background: #fff;
+  background: var(--tp-surface);
   color: var(--tp-blue);
 }
 
@@ -387,7 +503,7 @@ p {
 
 .tp-btn--outline-red {
   border-color: rgba(238, 59, 20, 0.4);
-  background: #fff;
+  background: var(--tp-surface);
   color: var(--tp-red);
 }
 
@@ -454,7 +570,7 @@ p {
   width: 100%;
   min-height: 44px;
   padding: 0.55rem 0.8rem;
-  background: #fff;
+  background: var(--tp-surface);
   border: 1.5px solid var(--tp-border-strong);
   border-radius: var(--tp-radius-sm);
   color: var(--tp-text);
@@ -561,7 +677,7 @@ p {
   left: 3px;
   width: 18px;
   height: 18px;
-  background: #fff;
+  background: #fff; /* botão do interruptor: branco nos dois temas, sobre trilho colorido */
   border-radius: 50%;
   box-shadow: var(--tp-shadow-xs);
   transition: transform var(--tp-t-fast);
@@ -639,7 +755,7 @@ p {
 .tp-note--demo {
   background: var(--tp-warning-soft);
   border-left-color: var(--tp-warning);
-  color: #6d4407;
+  color: color-mix(in srgb, var(--tp-warning) 70%, var(--tp-text));
 }
 
 
@@ -650,7 +766,7 @@ p {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(255, 255, 255, 0.96);
+  background: var(--tp-header-bg);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--tp-border);
   transition: box-shadow var(--tp-t);
@@ -756,7 +872,7 @@ p {
   max-height: min(90dvh, 900px);
   overflow-y: auto;
   padding: clamp(1.5rem, 1rem + 2vw, 2.25rem);
-  background: #fff;
+  background: var(--tp-surface);
   border-radius: var(--tp-radius-lg);
   box-shadow: var(--tp-shadow-lg);
   animation: tp-pop 220ms var(--tp-ease);
@@ -836,7 +952,7 @@ p {
   align-items: flex-start;
   gap: 0.6rem;
   padding: 0.8rem 1rem;
-  background: #fff;
+  background: var(--tp-surface);
   border: 1px solid var(--tp-border);
   border-left: 4px solid var(--tp-blue);
   border-radius: var(--tp-radius-sm);
@@ -874,7 +990,161 @@ p {
 
 
 /* ==========================================================================
-   09. REDUÇÃO DE MOVIMENTO
+   09. INTERRUPTOR DE TEMA
+   Botão presente no cabeçalho das três páginas. Os dois ícones ficam no HTML
+   e o CSS mostra apenas o do tema oposto (o destino do clique), usando os
+   tokens --tp-icon-sun / --tp-icon-moon definidos junto com as cores.
+   ========================================================================== */
+.tp-theme-toggle {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: var(--tp-radius-sm);
+  color: var(--tp-blue);
+  background: var(--tp-bg-mute);
+  transition: background-color var(--tp-t-fast), color var(--tp-t-fast);
+}
+
+.tp-theme-toggle:hover {
+  background: var(--tp-blue-soft);
+}
+
+.tp-theme-toggle__sun {
+  display: var(--tp-icon-sun);
+}
+
+.tp-theme-toggle__moon {
+  display: var(--tp-icon-moon);
+}
+
+/* Sobre fundo azul (barra lateral do painel) o botão inverte o contraste */
+.tp-theme-toggle--on-blue {
+  color: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.tp-theme-toggle--on-blue:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+
+/* ==========================================================================
+   10. AJUSTES DE CELULAR
+
+   Correções que valem para as três páginas. Os ajustes de layout de cada
+   página continuam no CSS dela — aqui ficam só os problemas de base.
+   ========================================================================== */
+
+/* Nome de produto comprido ou URL colada num campo não pode empurrar o
+   layout para fora da tela. */
+body {
+  overflow-wrap: break-word;
+}
+
+/* Painéis deslizantes (menu, filtros, carrinho) precisam rolar sozinhos:
+   em tela baixa o conteúdo passa da altura da janela e ficava inacessível. */
+.home-nav,
+.filters,
+.side,
+.drawer__panel {
+  overscroll-behavior: contain;
+}
+
+@media (max-width: 900px) {
+  .home-nav,
+  .filters,
+  .side {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Painel fechado fica estacionado fora da tela com translateX. Sendo
+   `position: fixed`, o clip do <body> não o alcança: ele esticava a área de
+   rolagem e o navegador do celular passava a calcular a "tela" pela largura
+   do conteúdo, não pela do aparelho — o modal de termos, por exemplo, era
+   posicionado fora do visor e ficava inalcançável.
+
+   Vale só até 960px, faixa em que esses painéis existem: no desktop o <html>
+   fica intocado. `overflow-y: auto` é obrigatório junto do clip — com um eixo
+   em `clip` e o outro em `visible`, o `visible` viraria `hidden` e a página
+   pararia de rolar. */
+@media (max-width: 960px) {
+  html {
+    overflow-x: clip;
+    overflow-y: auto;
+  }
+}
+
+@media (max-width: 640px) {
+  :root {
+    --tp-header-h: 60px;
+  }
+
+  /* O Safari do iPhone dá zoom automático em campo com fonte abaixo de 16px.
+     Fixar 16px aqui evita a página "saltar" ao tocar num input. */
+  .tp-input,
+  .tp-select,
+  .tp-textarea {
+    font-size: 16px;
+  }
+
+  /* Modal vira folha colada na base da tela: mais área útil e o polegar
+     alcança os botões. */
+  .tp-modal {
+    padding: 0;
+    place-items: end stretch;
+  }
+
+  .tp-modal__dialog {
+    width: 100%;
+    max-height: 92dvh;
+    padding: 1.25rem 1rem 1.5rem;
+    border-radius: var(--tp-radius-lg) var(--tp-radius-lg) 0 0;
+  }
+
+  .tp-modal__actions .tp-btn {
+    flex: 1;
+  }
+
+  /* Avisos flutuantes ocupam a largura da tela em vez de um cartão estreito */
+  .tp-toasts {
+    right: 0.5rem;
+    left: 0.5rem;
+    bottom: 0.5rem;
+    width: auto;
+  }
+
+  .tp-footer__inner {
+    justify-content: flex-start;
+  }
+}
+
+/* Em tela muito estreita o par de botões lado a lado quebra a linha */
+@media (max-width: 400px) {
+  .tp-btn--lg {
+    width: 100%;
+  }
+
+  .tp-logo {
+    font-size: 1.3rem;
+  }
+}
+
+/* No toque não existe hover: o "levantar" do botão fica preso depois do
+   clique e parece um estado travado. */
+@media (hover: none) {
+  .tp-btn:hover:not(:disabled) {
+    transform: none;
+  }
+}
+
+
+/* ==========================================================================
+   11. REDUÇÃO DE MOVIMENTO
    ========================================================================== */
 @media (prefers-reduced-motion: reduce) {
   html {

@@ -24,6 +24,9 @@
 
   <link rel="stylesheet" href="theme.css">
   <link rel="stylesheet" href="home.css">
+
+  <!-- Sem defer de propósito: aplica o tema salvo antes do primeiro desenho -->
+  <script src="theme-toggle.js"></script>
   <script src="data.js"></script>
   <script src="home.js" defer></script>
 </head>
@@ -49,6 +52,18 @@
         </ul>
         <a class="tp-btn tp-btn--red home-nav__cta" href="#planos">Entrar no Clube</a>
       </nav>
+
+      <!-- Rótulo e estado deste botão são atualizados por theme-toggle.js -->
+      <button class="tp-theme-toggle" type="button" data-theme-toggle
+              aria-label="Mudar para o modo escuro" aria-pressed="false">
+        <svg class="tp-theme-toggle__moon" viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a7.5 7.5 0 1 0 10.5 10.5z"></path>
+        </svg>
+        <svg class="tp-theme-toggle__sun" viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4.2"></circle>
+          <path d="M12 3v2m0 14v2M3 12h2m14 0h2M5.6 5.6l1.4 1.4m9.4 9.4l1.4 1.4m0-12.2l-1.4 1.4M7 15.6l-1.4 1.4"></path>
+        </svg>
+      </button>
 
       <button class="nav-toggle" type="button" id="nav-toggle" aria-expanded="false" aria-controls="home-nav" aria-label="Abrir menu">
         <span class="nav-toggle__bars" aria-hidden="true"></span>
